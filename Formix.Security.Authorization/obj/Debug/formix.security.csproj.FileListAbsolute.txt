@@ -1,0 +1,7 @@
+c:\users\jpgravel\documents\visual studio 2013\Projects\formix.security\formix.security\obj\Debug\formix.security.csprojResolveAssemblyReference.cache
+c:\users\jpgravel\documents\visual studio 2013\Projects\formix.security\formix.security\bin\Debug\Formix.Security.dll.config
+c:\users\jpgravel\documents\visual studio 2013\Projects\formix.security\formix.security\bin\Debug\Formix.Security.dll
+c:\users\jpgravel\documents\visual studio 2013\Projects\formix.security\formix.security\bin\Debug\Formix.Security.pdb
+c:\users\jpgravel\documents\visual studio 2013\Projects\formix.security\formix.security\bin\Debug\Jint.dll
+c:\users\jpgravel\documents\visual studio 2013\Projects\formix.security\formix.security\obj\Debug\Formix.Security.dll
+c:\users\jpgravel\documents\visual studio 2013\Projects\formix.security\formix.security\obj\Debug\Formix.Security.pdb

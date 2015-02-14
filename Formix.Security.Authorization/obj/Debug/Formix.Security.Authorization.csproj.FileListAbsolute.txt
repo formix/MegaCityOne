@@ -1,7 +1,0 @@
-C:\Users\jpgravel\Documents\Visual Studio 2013\Projects\formix.security\Formix.Security.Authorization\obj\Debug\Formix.Security.Authorization.csprojResolveAssemblyReference.cache
-C:\Users\jpgravel\Documents\Visual Studio 2013\Projects\formix.security\Formix.Security.Authorization\bin\Debug\Formix.Security.Authorization.dll.config
-C:\Users\jpgravel\Documents\Visual Studio 2013\Projects\formix.security\Formix.Security.Authorization\bin\Debug\Formix.Security.Authorization.dll
-C:\Users\jpgravel\Documents\Visual Studio 2013\Projects\formix.security\Formix.Security.Authorization\bin\Debug\Formix.Security.Authorization.pdb
-C:\Users\jpgravel\Documents\Visual Studio 2013\Projects\formix.security\Formix.Security.Authorization\bin\Debug\Jint.dll
-C:\Users\jpgravel\Documents\Visual Studio 2013\Projects\formix.security\Formix.Security.Authorization\obj\Debug\Formix.Security.Authorization.dll
-C:\Users\jpgravel\Documents\Visual Studio 2013\Projects\formix.security\Formix.Security.Authorization\obj\Debug\Formix.Security.Authorization.pdb

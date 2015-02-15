@@ -38,6 +38,11 @@ namespace MegaCityOne
         /// AI</param>
         public void Load(BookOfTheLaw newLaws)
         {
+            if (newLaws == null)
+            {
+                throw new ArgumentNullException("newLaws");
+            }
+
             foreach (var law in newLaws)
             {
                 this.laws.Add(law.Key, law.Value);
@@ -51,6 +56,11 @@ namespace MegaCityOne
         /// the laws to embark in Dredd's AI.</param>
         public void Load(JusticeDepartment justiceDepartment)
         {
+            if (justiceDepartment == null)
+            {
+                throw new ArgumentNullException("justiceDepartment");
+            }
+
             this.Load(justiceDepartment.GetLaws());
         }
 
@@ -62,6 +72,11 @@ namespace MegaCityOne
         /// </param>
         public void Load(Assembly library)
         {
+            if (library == null)
+            {
+                throw new ArgumentNullException("library");
+            }
+
             Type justiceDeptType = typeof(JusticeDepartment);
             foreach (var type in library.ExportedTypes)
             {
@@ -81,6 +96,11 @@ namespace MegaCityOne
         /// JusticeDepartment.</param>
         public void Load(string path)
         {
+            if (string.IsNullOrEmpty(path.Trim()))
+            {
+                throw new ArgumentException("The 'path' parameter cannot be null or empty.");
+            }
+
             Assembly assembly = Assembly.LoadFrom(path);
             this.Load(assembly);
         }
@@ -94,6 +114,15 @@ namespace MegaCityOne
         /// <returns></returns>
         public override bool Advise(string law, params object[] arguments)
         {
+            if (string.IsNullOrEmpty(law.Trim()))
+            {
+                throw new ArgumentException("The 'law' parameter cannot be null or empty.");
+            }
+            if (!this.laws.ContainsKey(law))
+            {
+                throw new ArgumentException("The specified law '" + law + "' is not defined.");
+            }
+
             return this.laws[law](this.Principal, arguments);
         }
 

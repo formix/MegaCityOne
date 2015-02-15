@@ -50,11 +50,11 @@
   <ItemGroup>
     <Compile Include="BookOfTheLaw.cs" />
     <Compile Include="AbstractJudge.cs" />
-    <Compile Include="IJusticeDepartment.cs" />
+    <Compile Include="JusticeDepartment.cs" />
     <Compile Include="JudgeDredd.cs" />
     <Compile Include="Law.cs" />
     <Compile Include="MessageEventArgs.cs" />
-    <Compile Include="IJudge.cs" />
+    <Compile Include="Judge.cs" />
     <Compile Include="JudgeAnderson.cs" />
     <Compile Include="LawgiverException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

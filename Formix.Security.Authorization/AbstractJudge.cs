@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MegaCityOne
 {
-    public abstract class AbstractJudge : IJudge
+    public abstract class AbstractJudge : Judge
     {
 
         #region Fields

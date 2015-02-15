@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MegaCityOne
 {
-    public interface IJusticeDepartment
+    public interface JusticeDepartment
     {
         BookOfTheLaw GetLaws();
     }

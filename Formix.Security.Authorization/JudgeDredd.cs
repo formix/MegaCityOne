@@ -45,29 +45,29 @@ namespace MegaCityOne
         }
 
         /// <summary>
-        /// Loads a set of laws obtained from the given IJusticeDepartment.
+        /// Loads a set of laws obtained from the given JusticeDepartment.
         /// </summary>
-        /// <param name="justiceDepartment">The IJusticeDepartment containing 
+        /// <param name="justiceDepartment">The JusticeDepartment containing 
         /// the laws to embark in Dredd's AI.</param>
-        public void Load(IJusticeDepartment justiceDepartment)
+        public void Load(JusticeDepartment justiceDepartment)
         {
             this.Load(justiceDepartment.GetLaws());
         }
 
         /// <summary>
-        /// Seeks all IJusticeDeparment from the library and loads the Laws 
+        /// Seeks all JusticeDeparment from the library and loads the Laws 
         /// they contains in Dredd's AI.
         /// </summary>
-        /// <param name="library">The library to search for IJusticeDepartment
+        /// <param name="library">The library to search for JusticeDepartment
         /// </param>
         public void Load(Assembly library)
         {
-            Type justiceDeptType = typeof(IJusticeDepartment);
+            Type justiceDeptType = typeof(JusticeDepartment);
             foreach (var type in library.ExportedTypes)
             {
                 if (justiceDeptType.IsAssignableFrom(type))
                 {
-                    IJusticeDepartment dept = (IJusticeDepartment)Activator.CreateInstance(type);
+                    JusticeDepartment dept = (JusticeDepartment)Activator.CreateInstance(type);
                     this.Load(dept.GetLaws());
                 }
             }
@@ -75,10 +75,10 @@ namespace MegaCityOne
 
         /// <summary>
         /// Search in the given path a library that may contains one or more 
-        /// IJusticeDepartment. If found, adds the laws obtained to Dredd's AI.
+        /// JusticeDepartment. If found, adds the laws obtained to Dredd's AI.
         /// </summary>
         /// <param name="path">The file path to the library containing the 
-        /// IJusticeDepartment.</param>
+        /// JusticeDepartment.</param>
         public void Load(string path)
         {
             Assembly assembly = Assembly.LoadFrom(path);

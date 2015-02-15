@@ -6,7 +6,7 @@ namespace MegaCityOne
     /// <summary>
     /// Defining a security engine basic interface.
     /// </summary>
-    public interface IJudge
+    public interface Judge
     {
         /// <summary>
         /// The principal assigned to the current Judge.

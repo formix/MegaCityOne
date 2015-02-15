@@ -119,7 +119,7 @@ namespace MegaCityOne
 
         /// <summary>
         /// Gives an advice based on a law defined in a JavaScript file.
-        /// See <see cref="MegaCityOne.IJudge.Advise"/> for more details.
+        /// See <see cref="MegaCityOne.Judge.Advise"/> for more details.
         /// </summary>
         /// <param name="law"></param>
         /// <param name="arguments"></param>

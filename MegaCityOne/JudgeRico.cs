@@ -14,6 +14,8 @@ namespace MegaCityOne
     /// </summary>
     public class JudgeRico : AbstractJudge
     {
+        #region Methods
+
         /// <summary>
         /// JudgeRico advise based on a claim type and a claim value for 
         /// a <see cref="System.Security.Claims.ClaimsPrincipal"/>. Thus 
@@ -61,5 +63,7 @@ namespace MegaCityOne
 
             return principal.HasClaim((string)arguments[0], (string)arguments[1]);
         }
+
+        #endregion
     }
 }

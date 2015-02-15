@@ -25,7 +25,7 @@ namespace MegaCityOne
 
         #region Internal Types
 
-        public delegate void JsMessageDelegate(object messageData);
+        private delegate void JsMessageDelegate(object messageData);
 
         #endregion
 

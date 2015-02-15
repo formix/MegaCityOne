@@ -10,21 +10,33 @@ namespace MegaCityOne
 {
     public class JudgeDredd : AbstractJudge
     {
+
+        #region Fields
+
         private BookOfTheLaw laws;
 
+        #endregion
+
+        #region Properties
 
         /// <summary>
-        /// Laws contained in Dredd's artificial AI.
+        /// Laws contained in Dredd's embarked artificial intelligence.
         /// </summary>
         public BookOfTheLaw Laws 
         {
             get { return this.laws; }
         }
 
+        #endregion
+
+        #region Constructors
+
         public JudgeDredd()
         {
             this.laws = new BookOfTheLaw();
         }
+
+        #endregion
 
         #region Methods
 

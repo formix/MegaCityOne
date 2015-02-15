@@ -61,7 +61,7 @@ namespace MegaCityOne
         {
             if (!this.Advise(law, arguments))
             {
-                string message = "Failed law advice for user: " +
+                string message = "Failed law advice for principal: " +
                         this.Principal.Identity.Name +
                         " and law: " + law;
                 if (arguments.Length > 0)

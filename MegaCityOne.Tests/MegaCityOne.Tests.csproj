@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AbstractJudgeTests.cs" />
+    <Compile Include="JudgeAndersonTests.cs" />
     <Compile Include="JudgeDreddTests.cs" />
     <Compile Include="Judges\JudgeDummy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,6 +61,11 @@
       <Project>{588c6266-830a-4f30-bb87-fa4c246c89f4}</Project>
       <Name>MegaCityOne</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="JusticeDepartment.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

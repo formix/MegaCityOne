@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace MegaCityOne
 {
-    public delegate bool Law(IPrincipal principal, params object[] arguments);
+    public delegate bool Law(IPrincipal principal, object[] arguments);
 }

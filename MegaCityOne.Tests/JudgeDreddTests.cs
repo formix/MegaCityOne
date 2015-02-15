@@ -16,7 +16,7 @@ namespace MegaCityOne.Tests
     {
 
         /// <summary>
-        /// Test to see if a simple law woks well.
+        /// Test to see if a simple law works well.
         /// </summary>
         [TestMethod]
         public void TestSimpleCompiledRuleSuccess()
@@ -34,7 +34,7 @@ namespace MegaCityOne.Tests
 
 
         /// <summary>
-        /// Insure that a Advise failure throws an LawgiverException.
+        /// Insure that an Advise failure throws an LawgiverException.
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(LawgiverException))]

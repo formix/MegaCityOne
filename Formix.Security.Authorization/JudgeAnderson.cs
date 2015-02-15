@@ -20,7 +20,7 @@ namespace Formix.Security.Authorization
     /// shall be outside of the reach of your web server (IIS I guess) in a 
     /// tightly secured folder.
     /// </summary>
-    public class JudgeAnderson : IJudge
+    public class JudgeAnderson : AbstractJudge
     {
 
         #region Internal Types
@@ -38,33 +38,10 @@ namespace Formix.Security.Authorization
         #region Fields
 
         private Jint.Engine engine;
-        private IPrincipal principal;
 
         #endregion
 
         #region Properties
-
-        /// <summary>
-        /// Gets the principal currently associated with this law engine.
-        /// </summary>
-        public virtual IPrincipal Principal {
-            get
-            {
-                if (this.principal == null)
-                {
-                    return Thread.CurrentPrincipal;
-                }
-                else
-                {
-                    return this.principal;
-                }
-            }
-
-            set
-            {
-                this.principal = value;
-            }
-        }
 
         public bool IsInitialized 
         { 
@@ -85,7 +62,6 @@ namespace Formix.Security.Authorization
         public JudgeAnderson()
         {
             this.engine = null;
-            this.principal = null;
         }
 
         #endregion
@@ -143,11 +119,12 @@ namespace Formix.Security.Authorization
 
         /// <summary>
         /// Gives an advice based on a law defined in a JavaScript file.
+        /// See <see cref="Formix.Security.Authorization.IJudge.Advise"/> for more details.
         /// </summary>
         /// <param name="law"></param>
         /// <param name="arguments"></param>
         /// <returns></returns>
-        public virtual bool Advise(string law, params object[] arguments)
+        public override bool Advise(string law, params object[] arguments)
         {
             if (this.engine == null)
             {
@@ -170,7 +147,7 @@ namespace Formix.Security.Authorization
         }
 
 
-        public virtual void Enforce(string law, params object[] arguments)
+        public override void Enforce(string law, params object[] arguments)
         {
             if (!this.Advise(law, arguments))
             {

@@ -48,9 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JudgeBase.cs" />
+    <Compile Include="JudgeDredd.cs" />
     <Compile Include="MessageEventArgs.cs" />
     <Compile Include="IJudge.cs" />
-    <Compile Include="JudgeDredd.cs" />
+    <Compile Include="JudgeAnderson.cs" />
     <Compile Include="LawgiverException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -12,10 +12,15 @@ using System.Threading;
 namespace Formix.Security.Authorization
 {
     /// <summary>
-    /// The JsSecurityEngine runs an internal JavaScript interpreter (namely 
-    /// Jint) to execute laws.
+    /// JudgeAnderson runs an internal JavaScript interpreter (namely Jint)
+    /// to execute laws that have been defined in a Javacript file on the 
+    /// server. This Judge is still a serverside component. Do not think that
+    /// it runs within a browser just because thw word "Javascript" was used 
+    /// in this summary. Note that the Javascript file used to define Laws 
+    /// shall be outside of the reach of your web server (IIS I guess) in a 
+    /// tightly secured folder.
     /// </summary>
-    public class JsDredd : IJudge
+    public class JudgeAnderson : IJudge
     {
 
         #region Internal Types
@@ -77,7 +82,7 @@ namespace Formix.Security.Authorization
         /// Initializes a new instance of the javascript law engine.
         /// </summary>
         /// <param name="principal"></param>
-        public JsDredd()
+        public JudgeAnderson()
         {
             this.engine = null;
             this.principal = null;
@@ -92,7 +97,7 @@ namespace Formix.Security.Authorization
         /// </summary>
         /// <param name="file">The file containing the javascript law 
         /// applied to the current principal.</param>
-        public virtual void Initialize(FileInfo file)
+        public virtual void Load(FileInfo file)
         {
             if (file == null)
             {
@@ -115,7 +120,7 @@ namespace Formix.Security.Authorization
                 throw new InvalidDataException("Cannot initialize the security engine with an empty laws file: " + file.FullName);
             }
 
-            this.Initialize(script);
+            this.Load(script);
         }
 
 
@@ -124,7 +129,7 @@ namespace Formix.Security.Authorization
         /// </summary>
         /// <param name="script">The javascript laws applied to the current 
         /// principal.</param>
-        public virtual void Initialize(string script)
+        public virtual void Load(string script)
         {
             if (string.IsNullOrEmpty(script.Trim()))
             {
@@ -136,7 +141,12 @@ namespace Formix.Security.Authorization
             this.engine.Execute(script);
         }
 
-
+        /// <summary>
+        /// Gives an advice based on a law defined in a JavaScript file.
+        /// </summary>
+        /// <param name="law"></param>
+        /// <param name="arguments"></param>
+        /// <returns></returns>
         public virtual bool Advise(string law, params object[] arguments)
         {
             if (this.engine == null)

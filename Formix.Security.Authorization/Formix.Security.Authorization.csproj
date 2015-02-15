@@ -48,8 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JudgeBase.cs" />
+    <Compile Include="BookOfTheLaw.cs" />
+    <Compile Include="AbstractJudge.cs" />
     <Compile Include="JudgeDredd.cs" />
+    <Compile Include="Law.cs" />
     <Compile Include="MessageEventArgs.cs" />
     <Compile Include="IJudge.cs" />
     <Compile Include="JudgeAnderson.cs" />

@@ -6,7 +6,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Formix.Security.Authorization
+namespace MegaCityOne
 {
     public class LawgiverException : SecurityException, ISerializable
     {

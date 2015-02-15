@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Principal;
 
-namespace Formix.Security.Authorization
+namespace MegaCityOne
 {
     /// <summary>
     /// Defining a security engine basic interface.
@@ -32,7 +32,7 @@ namespace Formix.Security.Authorization
         /// <param name="law">The law to be enforced.</param>
         /// <param name="arguments">Any system state that could help the 
         /// Judge to give a relevant sentence regarding the law in question.</param>
-        /// <exception cref="Formix.Security.Authorization.LawgiverException">
+        /// <exception cref="MegaCityOne.LawgiverException">
         /// Inherited from <see cref="System.Security.SecurityException"/>. 
         /// This exceptions is thrown at the face of current Principal if he 
         /// is breaking the given law.</exception>

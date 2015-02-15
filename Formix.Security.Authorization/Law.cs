@@ -5,7 +5,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Formix.Security.Authorization
+namespace MegaCityOne
 {
     public delegate bool Law(IPrincipal principal, params object[] arguments);
 }

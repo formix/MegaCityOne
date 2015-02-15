@@ -9,7 +9,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading;
 
-namespace Formix.Security.Authorization
+namespace MegaCityOne
 {
     /// <summary>
     /// JudgeAnderson runs an internal JavaScript interpreter (namely Jint)
@@ -119,7 +119,7 @@ namespace Formix.Security.Authorization
 
         /// <summary>
         /// Gives an advice based on a law defined in a JavaScript file.
-        /// See <see cref="Formix.Security.Authorization.IJudge.Advise"/> for more details.
+        /// See <see cref="MegaCityOne.IJudge.Advise"/> for more details.
         /// </summary>
         /// <param name="law"></param>
         /// <param name="arguments"></param>
@@ -144,22 +144,6 @@ namespace Formix.Security.Authorization
 
             JsValue lawResult = this.engine.Invoke(law, args);
             return lawResult.AsBoolean();
-        }
-
-
-        public override void Enforce(string law, params object[] arguments)
-        {
-            if (!this.Advise(law, arguments))
-            {
-                string message = "Failed law advice for user: " +
-                        this.Principal.Identity.Name +
-                        " and law: " + law;
-                if (arguments.Length > 0)
-                {
-                    message += " with the following arguments: " + arguments.ToString();
-                }
-                throw new LawgiverException(message);
-            }
         }
 
         /// <summary>

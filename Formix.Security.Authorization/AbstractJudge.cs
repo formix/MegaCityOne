@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Formix.Security.Authorization
+namespace MegaCityOne
 {
     public abstract class AbstractJudge : IJudge
     {
@@ -57,7 +57,20 @@ namespace Formix.Security.Authorization
 
         public abstract bool Advise(string law, params object[] arguments);
 
-        public abstract void Enforce(string law, params object[] arguments);
+        public virtual void Enforce(string law, params object[] arguments)
+        {
+            if (!this.Advise(law, arguments))
+            {
+                string message = "Failed law advice for user: " +
+                        this.Principal.Identity.Name +
+                        " and law: " + law;
+                if (arguments.Length > 0)
+                {
+                    message += " with the following arguments: " + arguments.ToString();
+                }
+                throw new LawgiverException(message);
+            }
+        }
 
         #endregion
     }

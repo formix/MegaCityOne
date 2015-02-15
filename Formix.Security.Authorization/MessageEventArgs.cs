@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Formix.Security.Authorization
+namespace MegaCityOne
 {
     /// <summary>
     /// An event argument containing a message sent by the Javascript function "message".

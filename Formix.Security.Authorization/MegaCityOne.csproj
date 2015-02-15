@@ -7,8 +7,8 @@
     <ProjectGuid>{588C6266-830A-4F30-BB87-FA4C246C89F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Formix.Security.Authorization</RootNamespace>
-    <AssemblyName>Formix.Security.Authorization</AssemblyName>
+    <RootNamespace>MegaCityOne</RootNamespace>
+    <AssemblyName>MegaCityOne</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="BookOfTheLaw.cs" />
     <Compile Include="AbstractJudge.cs" />
+    <Compile Include="IJusticeDepartment.cs" />
     <Compile Include="JudgeDredd.cs" />
     <Compile Include="Law.cs" />
     <Compile Include="MessageEventArgs.cs" />

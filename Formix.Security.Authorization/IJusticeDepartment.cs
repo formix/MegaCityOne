@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace MegaCityOne
 {
-    public class BookOfTheLaw : Dictionary<string, Law>
+    public interface IJusticeDepartment
     {
+        BookOfTheLaw GetLaws();
     }
 }

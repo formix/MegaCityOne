@@ -6,6 +6,7 @@ Windows Advanced Authorization System
 * This library integrates seamlessly with Wondows standard security.
 * This library integrates prefectly with ASP.NET security as well.
 * This library integrates with which library that sets a IPrincipal to Thread.CurrentPrincipal
-* This library integrates with anything else that is not Windows standard Security as well (with some more work)
+* This library integrates with anything else that is not Windows standard Security as well (with some more work).
+* Work inspired my previous experience implementing with Security Application Block and AzMan.
 
 #Usage

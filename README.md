@@ -11,3 +11,7 @@ Windows Advanced Authorization System
 
 # Usage
 
+
+# Contact
+
+Direct chat with us(me) on [Gitter](https://gitter.im/formix/MegaCityOne)

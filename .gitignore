@@ -3,4 +3,4 @@ obj
 *.suo
 Packages
 TestResults
-
+*.swp

@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MegaCityOne")]
-[assembly: AssemblyDescription("Authorization Framework by Formix")]
+[assembly: AssemblyDescription("Authorization Framework by formix.org")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("formix.org")]
 [assembly: AssemblyProduct("MegaCityOne")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCopyright("Copyright © formix.org 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

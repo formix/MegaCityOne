@@ -1,7 +1,7 @@
 # MegaCityOne
+Windows Advanced Authorization System
 
 [![Join the chat at https://gitter.im/formix/MegaCityOne](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/formix/MegaCityOne?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-Windows Advanced Authorization System
 
 * This is not an authentication library.
 * This project uses Judge Dredd metaphors to implement autorizations.
@@ -13,10 +13,18 @@ Windows Advanced Authorization System
 
 # Usage
 
-_While I'm editing this documentation, please consult Source code for 
+_While I'm editing this documentation, please consult the source code for 
 detailed information, especially test cases in the MegacityOne.Tests
 project. I paid special attention to document both functions and tests._
 
+## Know who you are...
+
+The first thing you can do with MegaCityOne is to know who you are:
+
+```c#
+Judge judge = new JudgeDredd();
+Console.WriteLine(judge.Principal.Identity.Name);
+```
 
 # Contact
 

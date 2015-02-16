@@ -26,5 +26,40 @@ Judge judge = new JudgeDredd();
 Console.WriteLine(judge.Principal.Identity.Name);
 ```
 
+The previous snippet shall display your current user name. For example:
+`FORMIX-PC\formix`.
+
+Now, lets be a little fancier and lets see in which Windows groups your 
+user is. Your result may differ than mine but should be quite similar.
+Open a command line prompt and write the following command: `net localgroup`.
+
+```
+Aliases for \\FORMIX-PC
+
+-------------------------------------------------------------------------------
+*__vmware__
+*Administrators
+*Auditors
+*Backup Operators
+*Cryptographic Operators
+*Distributed COM Users
+*Editors
+*Event Log Readers
+*Guests
+*HelpLibraryUpdaters
+*IIS_IUSRS
+*Network Configuration Operators
+*Performance Log Users
+*Performance Monitor Users
+*Power Users
+*Remote Desktop Users
+*Replicator
+*Users
+*VisualSVN Replication Partners
+*VisualSVN Repository Supervisors
+*VisualSVN Server Admins
+The command completed successfully.
+```
+
 # Contact
 

@@ -8,11 +8,11 @@
     <owners>$author$</owners>
     <licenseUrl>https://github.com/formix/MegaCityOne/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/formix/MegaCityOne</projectUrl>
-    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/formix/MegaCityOne/master/MegaCityOne/Images/MegaCityOne.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
-    <copyright>Copyright 2015</copyright>
-    <tags>Tag1 Tag2</tags>
+    <releaseNotes>First fully featured release</releaseNotes>
+    <copyright>Copyright 2015 formix.org</copyright>
+    <tags>Security, Authorization</tags>
   </metadata>
 </package>

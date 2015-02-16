@@ -13,7 +13,10 @@ Windows Advanced Authorization System
 
 # Usage
 
+_While I'm editing this documentation, please consult Source code for 
+detailed information, especially test cases in the MegacityOne.Tests
+project. I paid special attention to document both functions and tests._
+
 
 # Contact
 
-Direct chat with us(me) on [Gitter](https://gitter.im/formix/MegaCityOne)

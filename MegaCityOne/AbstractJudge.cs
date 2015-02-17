@@ -63,11 +63,7 @@ namespace MegaCityOne
             {
                 string message = "Failed law advice for principal: " +
                         this.Principal.Identity.Name +
-                        " and law: " + law;
-                if (arguments.Length > 0)
-                {
-                    message += " with the following arguments: " + arguments.ToString();
-                }
+                        " (" + law + "). Sentence: Death by Exception.";
                 throw new LawgiverException(message);
             }
         }

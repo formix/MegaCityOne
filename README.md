@@ -65,9 +65,9 @@ relevant to your current Windows Principal/Computer/Domain names._
 
 As stated earlier, MegaCityOne uses the Judge Dredd's universe metaphor to 
 bring authorization to your applications. Judges (there is actually two of 
-them implemented in MegaCityOne) will Advise or Enforce laws that you will
-define differently depending on the Judge you are using. Our first example
-uses JudgeDredd:
+them implemented in MegaCityOne) will Advise or Enforce laws that you define
+differently depending on the Judge you are using. Our first example uses 
+JudgeDredd:
 
 ```c#
 Judge judge = new JudgeDredd();
@@ -102,24 +102,26 @@ user rights. Show/hide or enable/disable buttons, tabs, menu items etc. The
 Advise method is a way to play nice with the Judge. If he says no, then don't
 give your user the temptation to press on the button, otherwise...
 
-## "...Sentence: Death"
+## "...Your sentence: Death"
 
-In Metro-City One, citizens often becomes perps and will try to play a trick 
-on you, sneak in and steal your property, kill somebody or click an 
-unauthorized button from behind. This is why all Judge can be instructed to
-Enforce a law:
+In Metro-City One, citizens are often perps and will try to play a trick 
+on you to sneak in and steal your property, kill somebody tou care for or 
+click an unauthorized button from behind. This is why all Judge can be 
+instructed to Enforce a law:
 
 ```c#
 judge.Enforce("CanWithdrawMoney");
 ```
 
 There is two outcome from now on: either you are in your good right and
-everything is fine... or your are a prep and you will receive a salve of 
+everything is fine... or your are a perp and you will receive a salve of 
 exploding bullets in your freaking hacker face, thanks to that good old
 LawgiverException. The said LawgiverException (a specialized SecurityException
 btw) containing your crime description and will kill your thread (unless caught
-somewhere else on the stack). You got what you deserved, bum. There is no iso
-chamber in my MegaCityOne implementation. Death sentences prevail.
+somewhere else on the stack).
+
+You got what you deserved, bum. There is no iso chamber in my MegaCityOne 
+implementation. Death sentences prevail.
 
 
-
+# 

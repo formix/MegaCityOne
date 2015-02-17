@@ -29,21 +29,18 @@ Console.WriteLine(judge.Principal.Identity.Name);
 The previous snippet shall display your current user name. For example:
 `FORMIX-PC\formix`.
 
-Now, lets be a little fancier and lets see in which Windows groups your 
-user is. Your result may differ than mine but should be quite similar.
+Now, lets be a little fancier and find out in which Windows groups your 
+user is in. Your result may differ than mine but should be quite similar.
 Open a command line prompt and write the following command: `net localgroup`.
 
 ```
 Aliases for \\FORMIX-PC
 
 -------------------------------------------------------------------------------
-*__vmware__
 *Administrators
-*Auditors
 *Backup Operators
 *Cryptographic Operators
 *Distributed COM Users
-*Editors
 *Event Log Readers
 *Guests
 *HelpLibraryUpdaters
@@ -60,6 +57,54 @@ Aliases for \\FORMIX-PC
 *VisualSVN Server Admins
 The command completed successfully.
 ```
+
+## "I am The Law"
+
+_In the following examples, please change "FORMIX-PC" and "formix" for values
+relevant to your current Windows Principal/Computer/Domain names._
+
+As stated earlier, MegaCityOne uses the Judge Dredd's universe metaphor to 
+bring authorization to your applications. Judges (there is actually two of 
+them implemented in MegaCityOne) will Advise or Enforce laws that you will
+define differently depending on the Judge you are using. Our first example
+uses JudgeDredd:
+
+```c#
+Judge judge = new JudgeDredd();
+judge.Laws.Add("CanWithdrawMoney", 
+    (principal, arguments) => principal.IsInRole("FORMIX-PC\\Users"));
+```
+
+Now, JudgeDredd have its first law to work with. Note that Windows 
+Security roles and user names are always prefixed by the computer name 
+(local logon) or the domain name (domain logon). This is not the case if 
+you use ASP.NET security or a GenericPrincipal implementation.
+
+The previous Lambda expression contains an "arguments" parameter that is
+discussed further in the Wiki section of this project. Lets forget it
+for now and have a look on how to put JudgeDredd to work:
+
+```c#
+bool canWithdraw = judge.Advise("CanWithdrawMoney");
+Console.WriteLine("Does {0} can withdraw from a bank account: {1}", 
+    judge.Principal.Identity.Name, canWithdraw);
+```
+
+The previous snippet shall display: 
+```
+Does FORMIX-PC\formix can withdraw from a bank account: True
+```
+
+Since the current user is in the "FORMIX-PC\Users" group, he will be allowed
+to withdraw money from an account! This use case is exactly the same as a
+system that needs to adjust it's user interface depending on the current 
+user rights. Show/hide or enable/disable buttons, tabs, menu items etc. The 
+Advise method is a way to play nice with the Judge. If he says no, then don't
+give your user the temptation to press on the button.
+
+
+
+
 
 # Contact
 

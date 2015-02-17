@@ -11,7 +11,7 @@
     <iconUrl>https://raw.githubusercontent.com/formix/MegaCityOne/master/MegaCityOne/Images/MegaCityOne.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>First fully featured release</releaseNotes>
+    <releaseNotes>Modified LawgiverException message</releaseNotes>
     <copyright>Copyright 2015 formix.org</copyright>
     <tags>Security, Authorization</tags>
   </metadata>

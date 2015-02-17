@@ -13,11 +13,12 @@ Windows Advanced Authorization System
 
 # Usage
 
-_Don't forget that the real documentation is the source code. You'll find 
-detailed information, especially test cases of the MegacityOne.Tests
-project. I paid special attention to document both functions and tests._
+_Don't forget that the real documentation is in the source code. You'll find 
+detailed information, especially within test cases of MegacityOne.Tests
+project. I paid special attention to document both actual Judes Methods and 
+tests._
 
-[Full JudgeDredd example](https://github.com/formix/MegaCityOne/blob/master/MegaCityOne.Examples/BankAccountExample.cs)
+[JudgeDredd example](https://github.com/formix/MegaCityOne/blob/master/MegaCityOne.Examples/BankAccountExample.cs)
 
 ## Know who you are...
 
@@ -40,14 +41,10 @@ Aliases for \\FORMIX-PC
 
 -------------------------------------------------------------------------------
 *Administrators
-*Backup Operators
 *Cryptographic Operators
 *Distributed COM Users
-*Event Log Readers
-*Guests
 *HelpLibraryUpdaters
 *IIS_IUSRS
-*Network Configuration Operators
 *Performance Log Users
 *Performance Monitor Users
 *Power Users
@@ -59,6 +56,9 @@ Aliases for \\FORMIX-PC
 *VisualSVN Server Admins
 The command completed successfully.
 ```
+
+Now that we know in which groups we are in, we will pick one at random... 
+lets say "Users" for the following section snippet.
 
 ## "I am The Law..."
 
@@ -80,10 +80,13 @@ judge.Laws.Add("CanWithdrawMoney",
 Now, JudgeDredd have its first law to work with. Note that Windows 
 Security roles and user names are always prefixed by the computer name 
 (local logon) or the domain name (domain logon). This is not the case if 
-you use ASP.NET security or a GenericPrincipal implementation.
+you use ASP.NET security form autientication or any kind of GenericPrincipal
+implementation.
 
-The previous Lambda expression contains an "arguments" parameter that is
-discussed further later. Lets forget it for now and have a look on how to 
+The previous Lambda expression contains an "arguments" parameter that used
+in the 
+[JudgeDredd example](https://github.com/formix/MegaCityOne/blob/master/MegaCityOne.Examples/BankAccountExample.cs). 
+Lets forget it for now and have a look on how to 
 put JudgeDredd to work:
 
 ```c#
@@ -107,7 +110,7 @@ give your user the temptation to press on the button, otherwise...
 ## "...Your sentence: Death"
 
 In Metro-City One, citizens are often perps and will try to play a trick 
-on you to sneak in and steal your property, kill somebody tou care for or 
+on you to sneak in and steal your property, kill somebody you care for or 
 click an unauthorized button from behind. This is why all Judge can be 
 instructed to Enforce a law:
 
@@ -118,12 +121,10 @@ judge.Enforce("CanWithdrawMoney");
 There is two outcome from now on: either you are in your good right and
 everything is fine... or your are a perp and you will receive a salve of 
 exploding bullets in your freaking hacker face, thanks to that good old
-LawgiverException. The said LawgiverException (a specialized SecurityException
-btw) containing your crime description and will kill your thread (unless caught
+LawgiverException. The mentioned exception (a specialized SecurityException
+btw) contains your crime description and will kill your thread (unless caught
 somewhere else on the stack).
 
 You got what you deserved, bum. There is no iso chamber in my MegaCityOne 
 implementation. Death sentences prevail.
-
-
-# 
+ 

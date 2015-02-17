@@ -52,17 +52,17 @@ namespace MegaCityOne.Examples
             }
             catch (Exception ex)
             {
-                Console.WriteLine("+++++ EXCEPTION +++++");
+                Console.WriteLine("+++++ {0} +++++", ex.GetType().Name);
                 Console.WriteLine("\t" + ex.Message);
             }
 
             try
             {
-                example.KayTheRobberTryToSteal();
+                example.KayTheRobberTriesToSteal();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("+++++ EXCEPTION +++++");
+                Console.WriteLine("+++++ {0} +++++", ex.GetType().Name);
                 Console.WriteLine("\t" + ex.Message);
             }
 
@@ -110,7 +110,7 @@ namespace MegaCityOne.Examples
             Console.WriteLine("-----------------------------------------");
         }
 
-        public void KayTheRobberTryToSteal()
+        public void KayTheRobberTriesToSteal()
         {
             // Change the principal of the current thread for Kay, a 
             // notorious Mega-City One perp. He is a bank customer as well

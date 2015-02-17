@@ -76,7 +76,7 @@ namespace MegaCityOne.Examples
 
         public void JamelaTheGoodCitizenWithdrawMoney()
         {
-            // Change the principal of the current thread for a Jamela, a 
+            // Change the principal of the current thread for Jamela, a 
             // good Mega-City One citizen.
             Thread.CurrentPrincipal = new GenericPrincipal(
                 new GenericIdentity("jamela"),
@@ -139,7 +139,7 @@ namespace MegaCityOne.Examples
             }
 
             // Kay will face his last judgement...
-            this.Withdraw(jamelasAccount, 60);
+            this.Withdraw(jamelasAccount, 300);
 
             Console.WriteLine("{0}: Have a good one sucka!",
                 judge.Principal.Identity.Name);
@@ -150,8 +150,9 @@ namespace MegaCityOne.Examples
 
         private bool AdviseWithJudge(BankAccount account)
         {
-            Console.WriteLine("{0}: Can I get some money from my account?",
-                this.judge.Principal.Identity.Name);
+            Console.WriteLine("{0}: Can I get some money from {1}'s account?",
+                this.judge.Principal.Identity.Name,
+                account.Owner);
 
             string judgeName = this.judge.GetType().Name;
             if (this.judge.Advise("CanWithdrawFromAccount", account))

@@ -58,7 +58,7 @@ Aliases for \\FORMIX-PC
 The command completed successfully.
 ```
 
-## "I am The Law"
+## "I am The Law..."
 
 _In the following examples, please change "FORMIX-PC" and "formix" for values
 relevant to your current Windows Principal/Computer/Domain names._
@@ -81,8 +81,8 @@ Security roles and user names are always prefixed by the computer name
 you use ASP.NET security or a GenericPrincipal implementation.
 
 The previous Lambda expression contains an "arguments" parameter that is
-discussed further in the Wiki section of this project. Lets forget it
-for now and have a look on how to put JudgeDredd to work:
+discussed further later. Lets forget it for now and have a look on how to 
+put JudgeDredd to work:
 
 ```c#
 bool canWithdraw = judge.Advise("CanWithdrawMoney");
@@ -96,15 +96,30 @@ Does FORMIX-PC\formix can withdraw from a bank account: True
 ```
 
 Since the current user is in the "FORMIX-PC\Users" group, he will be allowed
-to withdraw money from an account! This use case is exactly the same as a
+to withdraw money from an account. This use case is exactly the same as a
 system that needs to adjust it's user interface depending on the current 
 user rights. Show/hide or enable/disable buttons, tabs, menu items etc. The 
 Advise method is a way to play nice with the Judge. If he says no, then don't
-give your user the temptation to press on the button.
+give your user the temptation to press on the button, otherwise...
+
+## "...Sentence: Death"
+
+In Metro-City One, citizens often becomes perps and will try to play a trick 
+on you, sneak in and steal your property, kill somebody or click an 
+unauthorized button from behind. This is why all Judge can be instructed to
+Enforce a law:
+
+```c#
+judge.Enforce("CanWithdrawMoney");
+```
+
+There is two outcome from now on: either you are in your good right and
+everything is fine... or your are a prep and you will receive a salve of 
+exploding bullets in your freaking hacker face, thanks to that good old
+LawgiverException. The said LawgiverException (a specialized SecurityException
+btw) containing your crime description and will kill your thread (unless caught
+somewhere else on the stack). You got what you deserved, bum. There is no iso
+chamber in my MegaCityOne implementation. Death sentences prevail.
 
 
-
-
-
-# Contact
 

@@ -13,9 +13,11 @@ Windows Advanced Authorization System
 
 # Usage
 
-_While I'm editing this documentation, please consult the source code for 
-detailed information, especially test cases in the MegacityOne.Tests
+_Don't forget that the real documentation is the source code. You'll find 
+detailed information, especially test cases of the MegacityOne.Tests
 project. I paid special attention to document both functions and tests._
+
+[Full JudgeDredd example](https://github.com/formix/MegaCityOne/blob/master/MegaCityOne.Examples/BankAccountExample.cs)
 
 ## Know who you are...
 

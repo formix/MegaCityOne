@@ -18,10 +18,10 @@ This Project uses [Semantic Versioning](http://semver.org/).
 ## Authentication
 
 As stated in the premice, MegaCityOne has nothing to do with authentication.
-You can use known libraries and standards like OAuth 
-([Owin](https://www.nuget.org/packages/Microsoft.Owin.Security.OAuth/)) or 
+You can use known libraries like 
+[Owin](https://www.nuget.org/packages/Microsoft.Owin.Security.OAuth/) or 
 [ASP.NET Authentication](https://msdn.microsoft.com/en-us/library/eeyk640h%28v=vs.140%29.aspx) 
-existing services to handle that.
+to handle that.
 
 ### Web Application
 
@@ -41,16 +41,15 @@ System.Threading.Thread.CurrentPrincipal = new GenericPrincipal(
 ```
 
 Note that by default, the running thread current user corresponds to a 
-WindowsPrincipal for your user with your assignated groups or 
-IUSR_SOMETHING for web applications (unless using IIS Windows 
-authentication).
+WindowsPrincipal with your Windows defined groups or IUSR_SOMETHING 
+for web applications (unless using IIS Windows authentication).
 
 ## How to Judge
 
 Judging perps and interpreting the Law require years of long lasting studies
-and a lot of bloody practices in dangerous dark alleys. To help you to do 
-this dangerous task, MegaCityOne offers Judges that will do that for you in 
-different ways.
+and a lot of bloody practices in dangerous dark alleys. To help you do 
+this dangerous task, MegaCityOne offers Judges that will execute your 
+legislation in different ways.
 
 ### JudgeDredd
 
@@ -91,7 +90,7 @@ function AllowOpenChannel(principal) {
 For any Judge, you have the following two methods: Advise and Enforce. The
 Advise method is called to display or hide user interface elements. The 
 Enforce method is called to protect a section of code from illegal activity.
-Enforce will throw an exception if the Law is not respected.
+Enforce will throw an exception if the Law is broken.
 
 ```c#
 if (judge.Advise("AllowOpenChannel"))
@@ -109,13 +108,58 @@ judge.Enforce("AllowOpenChannel");
 
 ```
 
-[JudgeDredd example](https://github.com/formix/MegaCityOne/blob/master/MegaCityOne.Examples/BankAccountExample.cs)
+## Make Your Case
 
-## "I am The Law"
+Sometimes, a Judge will need some arguments from you to help him distinguish
+the truth and deliver Justice. Those arguments can be optionaly given to the 
+Judge when you ask him an advice (Advise) or when you ask him to Enforce a 
+Law.
 
-MegaCityOne is extension friendly. All public and protected Judge methods are
-virtual. You can extends existing Judges easily or create a brand new one from
-AbstractJudge or Judge interface if needs be.
+```c#
+JudgeDread judge = new JudgeDread();
+dredd.Laws.Add(
+    "CanSaveQuote", 
+    (principal, arguments) 
+        => 
+        principal.IsInRole("SalesRep")) &&
+        ((Quote)arguments[0]).Owner == principal.Identity.Name;
+
+
+if (dredd.advise("CanSaveQuote", currentQuote))
+{
+    // show the save button
+}
+```
+
+In this particular case, The JavaScript rule definition is way more 
+convenient:
+
+```javascript
+
+// A JavaScript rule with an argument!
+
+function CanSaveQuote(principal, quote) {
+    return principal.IsInRole("SalesRep") && 
+           quote.Owner === principal.Identity.Name
+}
+```
+
+## I am The Law
+
+MegaCityOne is easily extensible and IOC friendly. All public and protected 
+Judge methods are virtual. You can extends existing Judges or create a 
+brand new one from AbstractJudge or Judge interface if needs be.
+
+# Example
+
+[Bank account example using JudgeDredd](https://github.com/formix/MegaCityOne/blob/master/MegaCityOne.Examples/BankAccountExample.cs)
+
+# Regarding Interfaces
+
+Even if I come from a Java World, I tend to respect the unpleasant hungarian 
+notation prefix "I" for interface names when coding .NET. But for this 
+particular library, I found that the "I" prefix broke the coding storyline 
+created by the JudgeDredd metaphore.
 
 # One Last Word
 

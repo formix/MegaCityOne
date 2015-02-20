@@ -130,7 +130,7 @@ namespace MegaCityOne
 
             if (script == null || script.Trim() == "")
             {
-                throw new InvalidDataException("Cannot initialize the security engine with an empty laws file: " + file.FullName);
+                throw new InvalidDataException("The provided stream is empty.");
             }
 
             this.Load(script);

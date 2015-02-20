@@ -146,9 +146,11 @@ function CanSaveQuote(principal, quote) {
 
 ## I am The Law
 
-MegaCityOne is easily extensible and IOC friendly. All public and protected 
-Judge methods are virtual. You can extends existing Judges or create a 
-brand new one from AbstractJudge or Judge interface if needs be.
+MegaCityOne is easily extensible and 
+[IoC](http://en.wikipedia.org/wiki/Inversion_of_control) friendly. 
+All public and protected methods are virtual. You can extends existing 
+Judges or create a brand new one from AbstractJudge or Judge interface 
+if needs be.
 
 # Example
 
@@ -156,10 +158,10 @@ brand new one from AbstractJudge or Judge interface if needs be.
 
 # Regarding Interfaces
 
-Even if I come from a Java World, I tend to respect the unpleasant hungarian 
+Even if I come from a Java World, I respect the unpleasant hungarian 
 notation prefix "I" for interface names when coding .NET. But for this 
 particular library, I found that the "I" prefix broke the coding storyline 
-created by the JudgeDredd metaphore.
+created by the JudgeDredd metaphore, so I stripped it.
 
 # One Last Word
 

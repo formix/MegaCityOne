@@ -161,12 +161,12 @@ if needs be.
 Even if I come from a Java World, I respect the unpleasant hungarian 
 notation prefix "I" for interface names when coding .NET. But for this 
 particular library, I found that the "I" prefix broke the coding storyline 
-created by the JudgeDredd metaphore, so I stripped it.
+created by the JudgeDredd metaphor, so I stripped it.
 
 # One Last Word
 
 > You got what you deserved, bum. There is no iso chamber in my MegaCityOne 
 > implementation. Death sentences prevail.
 >
-> - JudgeDredd
+> _- JudgeDredd_
  

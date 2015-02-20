@@ -10,7 +10,8 @@
     <projectUrl>https://github.com/formix/MegaCityOne</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/formix/MegaCityOne/master/MegaCityOne/Images/MegaCityOne.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>
+    <description>$description$</description>
+    <summary>
       MegaCityOne is an authorization library that plugs into any kind of
       authentication system available. You can use JudgeDredd to handle your
       laws defined as lambda expressions or JudgeAnderson if your are the
@@ -19,8 +20,8 @@
       after user authentication and the judge you choose will be ready to go.
       You can also define your own Judge by Implementing the AbstractJudge. You
       are The Law!
-    </description>
-    <releaseNotes>Modified event from JudgeAnderson.Message to Message</releaseNotes>
+    </summary>
+    <releaseNotes>Changed some class interfaces, improved extensibility and documentation.</releaseNotes>
     <copyright>Copyright 2015 formix.org</copyright>
     <tags>Security, Authorization</tags>
   </metadata>

@@ -6,38 +6,40 @@ using System.Text;
 namespace MegaCityOne
 {
     /// <summary>
-    /// An event argument containing a message sent by the Javascript function "message".
+    /// An event argument containing a message sent by the Javascript 
+    /// function "message".
     /// </summary>
     public class MessageEventArgs : EventArgs
     {
         /// <summary>
         /// Gets the message content.
         /// </summary>
-        public string Message { get; private set; }
+        public string Text { get; private set; }
 
         public MessageEventArgs() : this(string.Empty)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of JsEngineMessageEventArgs.
+        /// Initializes a new instance of JsMessageEventArgs.
         /// </summary>
-        /// <param name="message">The message received from the internal Javascript engine.</param>
-        public MessageEventArgs(string message)
+        /// <param name="text">The message text received from the internal 
+        /// Javascript engine.</param>
+        public MessageEventArgs(string text)
         {
-            this.Message = message;
+            this.Text = text;
         }
 
         public override string ToString()
         {
-            return string.Format("Engine message: {0}", this.Message);
+            return string.Format("Engine message: {0}", this.Text);
         }
     }
 
     /// <summary>
-    /// Delegate for JsEngineMessage passing.
+    /// Delegate for JsMessage passing.
     /// </summary>
     /// <param name="source">The source object of the message.</param>
-    /// <param name="e">The JsEngineMessageEventArgs instance</param>
+    /// <param name="e">The JsMessageEventArgs instance</param>
     public delegate void MessageDelegate(object source, MessageEventArgs e);
 }

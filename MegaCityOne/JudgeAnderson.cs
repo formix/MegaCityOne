@@ -14,11 +14,7 @@ namespace MegaCityOne
     /// <summary>
     /// JudgeAnderson runs an internal JavaScript interpreter (namely Jint)
     /// to execute laws that have been defined in a Javacript file on the 
-    /// server. This Judge is still a serverside component. Do not think that
-    /// it runs within a browser just because thw word "Javascript" was used 
-    /// in this summary. Note that the Javascript file used to define Laws 
-    /// shall be outside of the reach of your web server (IIS I guess) in a 
-    /// tightly secured folder.
+    /// server.
     /// </summary>
     public class JudgeAnderson : AbstractJudge
     {
@@ -31,7 +27,11 @@ namespace MegaCityOne
 
         #region Events
 
-        public event MessageDelegate EngineMessage;
+        /// <summary>
+        /// Event launched when the "message(text)" function is called from 
+        /// the JavaScript.
+        /// </summary>
+        public event MessageDelegate Message;
 
         #endregion
 
@@ -43,7 +43,7 @@ namespace MegaCityOne
 
         #region Properties
 
-        public bool IsInitialized 
+        public virtual bool IsInitialized 
         { 
             get
             {
@@ -68,11 +68,37 @@ namespace MegaCityOne
 
         #region Methods
 
+
+        /// <summary>
+        /// Adds an object to the JavaScript engine.
+        /// </summary>
+        /// <param name="name">How the object shall be called in the script.</param>
+        /// <param name="target">The object reference to be added.</param>
+        public virtual void AddObject(string name, object target)
+        {
+            if (!this.IsInitialized)
+            {
+                throw new InvalidOperationException("Cannot add an object the Javascript Engine befaur loading a script!");
+            }
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("Argument 'name' cannot be null, empty or contains only spaces");
+            }
+
+            if (target == null)
+            {
+                throw new ArgumentNullException("target");
+            }
+
+            this.engine.SetValue(name, target);
+        }
+
         /// <summary>
         /// Loads a law script from the specified file.
         /// </summary>
         /// <param name="file">The file containing the javascript law 
-        /// applied to the current principal.</param>
+        /// to be loaded in the current principal.</param>
         public virtual void Load(FileInfo file)
         {
             if (file == null)
@@ -85,11 +111,22 @@ namespace MegaCityOne
                 throw new FileNotFoundException("Cannot initialize security engine. The laws file does not exists: " + file.FullName);
             }
 
-            string script = null;
-            using (var sr = file.OpenText())
+            using (TextReader reader = file.OpenText())
             {
-                script = sr.ReadToEnd();
+                this.Load(reader);
             }
+        }
+
+
+        /// <summary>
+        /// Loads a JavaScript law file definition.
+        /// </summary>
+        /// <param name="reader">The reader containing the JavaScript code.
+        /// </param>
+        public virtual void Load(TextReader reader)
+        {
+            string script = null;
+            script = reader.ReadToEnd();
 
             if (script == null || script.Trim() == "")
             {
@@ -113,7 +150,7 @@ namespace MegaCityOne
             }
 
             this.engine = new Jint.Engine();
-            this.engine.SetValue("message", new JsMessageDelegate(o => OnEngineMessage(new MessageEventArgs(o.ToString()))));
+            this.engine.SetValue("message", new JsMessageDelegate(o => OnMessage(new MessageEventArgs(o.ToString()))));
             this.engine.Execute(script);
         }
 
@@ -150,11 +187,11 @@ namespace MegaCityOne
         /// Raise the Message event.
         /// </summary>
         /// <param name="">The event data</param>
-        protected virtual void OnEngineMessage(MessageEventArgs e)
+        protected virtual void OnMessage(MessageEventArgs e)
         {
-            if (this.EngineMessage != null)
+            if (this.Message != null)
             {
-                this.EngineMessage(this, e);
+                this.Message(this, e);
             }
         }
 

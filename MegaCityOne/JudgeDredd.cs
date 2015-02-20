@@ -22,7 +22,7 @@ namespace MegaCityOne
         /// <summary>
         /// Laws contained in Dredd's embarked artificial intelligence.
         /// </summary>
-        public BookOfTheLaw Laws 
+        public virtual BookOfTheLaw Laws 
         {
             get { return this.laws; }
         }
@@ -48,7 +48,7 @@ namespace MegaCityOne
         /// </summary>
         /// <param name="newLaws">A set of new laws to add to Dredd's embarked 
         /// AI</param>
-        public void Load(BookOfTheLaw newLaws)
+        public virtual void Load(BookOfTheLaw newLaws)
         {
             if (newLaws == null)
             {
@@ -66,7 +66,7 @@ namespace MegaCityOne
         /// </summary>
         /// <param name="justiceDepartment">The JusticeDepartment containing 
         /// the laws to embark in Dredd's AI.</param>
-        public void Load(JusticeDepartment justiceDepartment)
+        public virtual void Load(JusticeDepartment justiceDepartment)
         {
             if (justiceDepartment == null)
             {
@@ -82,7 +82,7 @@ namespace MegaCityOne
         /// </summary>
         /// <param name="library">The library to search for JusticeDepartment
         /// </param>
-        public void Load(Assembly library)
+        public virtual void Load(Assembly library)
         {
             if (library == null)
             {
@@ -100,13 +100,23 @@ namespace MegaCityOne
             }
         }
 
+
+        /// <summary>
+        /// Search for a JusticeDepartment implementation in the calling 
+        /// library.
+        /// </summary>
+        public virtual void Load()
+        {
+            this.Load(Assembly.GetCallingAssembly());
+        }
+
         /// <summary>
         /// Search in the given path a library that may contains one or more 
         /// JusticeDepartment. If found, adds the laws obtained to Dredd's AI.
         /// </summary>
         /// <param name="path">The file path to the library containing the 
         /// JusticeDepartment.</param>
-        public void Load(string path)
+        public virtual void Load(string path)
         {
             if (string.IsNullOrEmpty(path.Trim()))
             {

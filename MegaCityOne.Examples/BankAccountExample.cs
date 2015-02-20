@@ -48,13 +48,16 @@ namespace MegaCityOne.Examples
 
             try
             {
-                example.JamelaTheGoodCitizenWithdrawMoney();
+                example.JamelaTheGoodCitizenWithdrawsMoney();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("+++++ {0} +++++", ex.GetType().Name);
                 Console.WriteLine("\t" + ex.Message);
             }
+
+            Console.WriteLine("Press ENTER to continue...");
+            Console.ReadLine();
 
             try
             {
@@ -63,18 +66,19 @@ namespace MegaCityOne.Examples
             catch (Exception ex)
             {
                 Console.WriteLine("+++++ {0} +++++", ex.GetType().Name);
-                Console.WriteLine("\t" + ex.Message);
+                Console.WriteLine("\t{0}\n", ex.Message);
             }
 
             Thread.CurrentPrincipal = initialPrincipal;
 
             Console.WriteLine("-----------------------------------------");
 
+            Console.WriteLine("Press ENTER to exit...");
             Console.ReadLine();
         }
 
 
-        public void JamelaTheGoodCitizenWithdrawMoney()
+        public void JamelaTheGoodCitizenWithdrawsMoney()
         {
             // Change the principal of the current thread for Jamela, a 
             // good Mega-City One citizen.
@@ -92,18 +96,18 @@ namespace MegaCityOne.Examples
             bool judgeAccepts = this.AdviseWithJudge(jamelasAccount);
             if (judgeAccepts)
             {
-                Console.WriteLine("{0}: Thanks!",
+                Console.WriteLine("{0}:\n\t-Thanks!\n",
                     judge.Principal.Identity.Name);
 
                 // Jamela withdraws money witout fearing JudgeDredd.
                 this.Withdraw(jamelasAccount, 60);
 
-                Console.WriteLine("{0}: Have a good one Judge!",
+                Console.WriteLine("{0}:\n\t-Have a good one Judge!\n",
                     judge.Principal.Identity.Name);
             }
             else
             {
-                Console.WriteLine("{0}: I will fill a complaint, bigot!",
+                Console.WriteLine("{0}:\n\t-I will fill a complaint, bigot!\n",
                     judge.Principal.Identity.Name);
             }
 
@@ -129,40 +133,40 @@ namespace MegaCityOne.Examples
             bool judgeAccepts = this.AdviseWithJudge(jamelasAccount);
             if (judgeAccepts)
             {
-                Console.WriteLine("{0}: Thanks, looser!",
+                Console.WriteLine("{0}:\n\t-Thanks, looser!\n",
                     judge.Principal.Identity.Name);
             }
             else
             {
-                Console.WriteLine("{0}: I don't care about you!",
+                Console.WriteLine("{0}:\n\t-I don't care about you!\n",
                     judge.Principal.Identity.Name);
             }
 
             // Kay will face his last judgement...
             this.Withdraw(jamelasAccount, 300);
 
-            Console.WriteLine("{0}: Have a good one sucka!",
+            Console.WriteLine("{0}:\n\t-Have a good one sucka!\n",
                 judge.Principal.Identity.Name);
 
-            Console.WriteLine("-----------------------------------------");
+            Console.WriteLine("-----------------------------------------\n");
         }
 
 
         private bool AdviseWithJudge(BankAccount account)
         {
-            Console.WriteLine("{0}: Can I get some money from {1}'s account?",
+            Console.WriteLine("{0}:\n\t-Can I get some money from {1}'s account?\n",
                 this.judge.Principal.Identity.Name,
                 account.Owner);
 
             string judgeName = this.judge.GetType().Name;
             if (this.judge.Advise("CanWithdrawFromAccount", account))
             {
-                Console.WriteLine("{0}: Go ahead citizen.", judgeName);
+                Console.WriteLine("{0}:\n\t-Go ahead citizen.\n", judgeName);
                 return true;
             }
             else
             {
-                Console.WriteLine("{0}: No! be warned perp.", judgeName);
+                Console.WriteLine("{0}:\n\t-No! be warned perp.\n", judgeName);
                 return false;
             }
         }
@@ -180,8 +184,8 @@ namespace MegaCityOne.Examples
 
             account.Balance -= amount;
 
-            Console.WriteLine("*** {0} withraws ${1:0.00} from {2}'s " +
-                              "account, balance: ${3:0.00} ***",
+            Console.WriteLine("\t *** {0} withraws ${1:0.00} from {2}'s " +
+                              "account, balance: ${3:0.00} ***\n",
                 this.judge.Principal.Identity.Name,
                 amount,
                 account.Owner,

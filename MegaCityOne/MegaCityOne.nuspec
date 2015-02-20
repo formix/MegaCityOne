@@ -6,12 +6,21 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <licenseUrl>https://github.com/formix/MegaCityOne/blob/master/LICENSE</licenseUrl>
+    <licenseUrl>https://raw.githubusercontent.com/formix/MegaCityOne/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/formix/MegaCityOne</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/formix/MegaCityOne/master/MegaCityOne/Images/MegaCityOne.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
-    <releaseNotes>Modified LawgiverException message</releaseNotes>
+    <description>
+      MegaCityOne is an authorization library that plugs into any kind of
+      authentication system available. You can use JudgeDredd to handle your
+      laws defined as lambda expressions or JudgeAnderson if your are the
+      server-side JavaScript kind. Sets System.Web.HttpContext.Current.User
+      (Web application) or System.Threading.Thread.CurrentPrincipal (desktop app)
+      after user authentication and the judge you choose will be ready to go.
+      You can also define your own Judge by Implementing the AbstractJudge. You
+      are The Law!
+    </description>
+    <releaseNotes>Modified event from JudgeAnderson.Message to Message</releaseNotes>
     <copyright>Copyright 2015 formix.org</copyright>
     <tags>Security, Authorization</tags>
   </metadata>

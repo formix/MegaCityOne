@@ -4,7 +4,7 @@ Windows Advanced Authorization System
 [![Join the chat at https://gitter.im/formix/MegaCityOne](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/formix/MegaCityOne?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 * This is not an authentication library.
-* This project uses Judge Dredd metaphors to implement autorizations.
+* This project uses Judge Dredd metaphor to implement autorization.
 * This library integrates:
     * seamlessly with Windows Standard Security;
     * prefectly with ASP.NET security;

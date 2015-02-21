@@ -13,6 +13,14 @@ Windows Advanced Authorization System
 
 This Project uses [Semantic Versioning](http://semver.org/).
 
+# Installation
+
+MegaCityOne is available at [Nuget.org](https://www.nuget.org/packages/MegaCityOne/) and
+can be installed as a package using VisualStudio NuGet package manager or via the NuGet
+command line:
+
+> Install-Package MegaCityOne
+
 # Usage
 
 ## Authentication

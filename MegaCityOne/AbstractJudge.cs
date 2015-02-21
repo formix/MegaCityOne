@@ -26,14 +26,13 @@ namespace MegaCityOne
         /// Gets or sets the principal currently under scrutiny of this Judge.
         /// After the Judge instanciation, the scrutinized principal 
         /// corresponds to the principal found in 
-        /// <see cref="System.Threading.Thread.CurrentPrincipal"/>. This is 
+        /// System.Threading.Thread.CurrentPrincipal. This is 
         /// the Judge main target. During the course of action, you can bring 
         /// another IPrincipal under scrutiny by setting this value. To take 
         /// the Judge attention back to the main target, sets this property 
-        /// back to null.
-        /// </summary>
+        /// back to null.</summary>
         /// <remarks>Setting a value to this property do not override 
-        /// <see cref="System.Threading.Thread.CurrentPrincipal"/>.</remarks>
+        /// System.Threading.Thread.CurrentPrincipal.</remarks>
         public virtual IPrincipal Principal
         {
             get
@@ -59,7 +58,7 @@ namespace MegaCityOne
         #region Methods
 
         /// <summary>
-        /// The advise method to be implemented by specialized Judges.
+        /// The advise method to be implemented by the specialized Judges.
         /// </summary>
         /// <param name="law">The name of a Law to be interpreted by the 
         /// Judge.</param>

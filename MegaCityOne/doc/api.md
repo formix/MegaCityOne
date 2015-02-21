@@ -1,394 +1,334 @@
-## MegaCityOne ##
 
-# T:MegaCityOne.AbstractJudge
+# MegaCityOne
 
- Basic implementation of a Judge. 
 
+## AbstractJudge
 
+Basic implementation of a Judge.
 
----
-# T:MegaCityOne.Judge
 
- Defining a security engine basic interface. 
+### Advise(law, arguments)
 
+The advise method to be implemented by the specialized Judges.
 
+| Name | Description |
+| ---- | ----------- |
+| law | *System.String*<br>The name of a Law to be interpreted by the Judge. |
+| arguments | *System.Object[]*<br>Optional arguments given to the Judge to interpret a Law properly. |
 
----
-##### M:MegaCityOne.Judge.Advise(System.String,System.Object[])
 
- The Judge gives an adivce regarding a law taking in account some optional arguments for the current Principal. 
+#### Returns
 
-|Name | Description |
-|-----|------|
-|law: |The law to be advised.|
-|arguments: |Any system state that could help the Judge to give a relevant advice regarding the law in question.|
-Returns: True if the advised law is respected for the current Principal, given optional arguments. False otherwise.
+True if the Law is respected, False otherwise.
 
 
+### Enforce(law, arguments)
 
----
-##### M:MegaCityOne.Judge.Enforce(System.String,System.Object[])
+Standard Law enforcement inplementation. This implementation will advise the given Law with the provided optional arguments. If the Law advises falsely, throws a LawgiverException. If it advises truthy then this method does nothing.
 
- The Judge is in a situation where he have to give a Life or Death sentence regarding a law, given optional arguments provided, for the current Principal. 
+| Name | Description |
+| ---- | ----------- |
+| law | *System.String*<br>The name of a Law to be interpreted by the Judge. |
+| arguments | *System.Object[]*<br>Optional arguments given to the Judge to interpret a Law properly. |
 
-|Name | Description |
-|-----|------|
-|law: |The law to be enforced.|
-|arguments: |Any system state that could help the Judge to give a relevant sentence regarding the law in question.|
-[[T:MegaCityOne.LawgiverException|T:MegaCityOne.LawgiverException]]:  Inherited from [[|T:System.Security.SecurityException]]. This exceptions is thrown at the face of current Principal if he is breaking the given law.
+<span style='color:red'>*LawgiverException:*</span> Thrown when the given Law advise falsely with the optional arguments.
 
 
+### Principal
 
----
-##### P:MegaCityOne.Judge.Principal
+Gets or sets the principal currently under scrutiny of this Judge. After the Judge instanciation, the scrutinized principal corresponds to the principal found in System.Threading.Thread.CurrentPrincipal. This is the Judge main target. During the course of action, you can bring another IPrincipal under scrutiny by setting this value. To take the Judge attention back to the main target, sets this property back to null.
 
- The principal assigned to the current Judge. 
 
+#### Remarks
 
+Setting a value to this property do not override System.Threading.Thread.CurrentPrincipal.
 
----
-##### M:MegaCityOne.AbstractJudge.Advise(System.String,System.Object[])
 
- The advise method to be implemented by specialized Judges. 
+## Judge
 
-|Name | Description |
-|-----|------|
-|law: |The name of a Law to be interpreted by the Judge.|
-|arguments: |Optional arguments given to the Judge to interpret a Law properly.|
-Returns: True if the Law is respected, False otherwise.
+Defining a security engine basic interface.
 
 
+### Advise(law, arguments)
 
----
-##### M:MegaCityOne.AbstractJudge.Enforce(System.String,System.Object[])
+The Judge gives an adivce regarding a law taking in account some optional arguments for the current Principal.
 
- Standard Law enforcement inplementation. This implementation will advise the given Law with the provided optional arguments. If the Law advises falsy, throws a LawgiverException. If it advises truthy then this method does nothing. 
+| Name | Description |
+| ---- | ----------- |
+| law | *System.String*<br>The law to be advised. |
+| arguments | *System.Object[]*<br>Any system state that could help the Judge to give a relevant advice regarding the law in question. |
 
-|Name | Description |
-|-----|------|
-|law: |The name of a Law to be interpreted by the Judge.|
-|arguments: |Optional arguments given to the Judge to interpret a Law properly.|
-[[T:MegaCityOne.LawgiverException|T:MegaCityOne.LawgiverException]]: Thrown when the given Law advise falsy with the optional arguments.
 
+#### Returns
 
+True if the advised law is respected for the current Principal, given optional arguments. False otherwise.
 
----
-##### P:MegaCityOne.AbstractJudge.Principal
 
- Gets or sets the principal currently under scrutiny of this Judge. After the Judge instanciation, the scrutinized principal corresponds to the principal found in [[|P:System.Threading.Thread.CurrentPrincipal]]. This is the Judge main target. During the course of action, you can bring another IPrincipal under scrutiny by setting this value. To take the Judge attention back to the main target, sets this property back to null. 
+### Enforce(law, arguments)
 
+The Judge is in a situation where he have to give a Life or Death sentence regarding a law, given optional arguments provided, for the current Principal.
 
+| Name | Description |
+| ---- | ----------- |
+| law | *System.String*<br>The law to be enforced. |
+| arguments | *System.Object[]*<br>Any system state that could help the Judge to give a relevant sentence regarding the law in question. |
 
->Setting a value to this property do not override [[|P:System.Threading.Thread.CurrentPrincipal]].
+<span style='color:red'>*LawgiverException:*</span>  Inherited from System.Security.SecurityException. This exceptions is thrown at the face of current Principal if he is breaking the given law.
 
 
+### Principal
 
----
-# T:MegaCityOne.JusticeDepartment
+The principal assigned to the current Judge.
 
- A JusticeDepartment instance must have a default constructor. 
 
+## JudgeAnderson
 
+JudgeAnderson runs an internal JavaScript interpreter to execute laws that have been defined in a Javacript file on the server.
 
----
-##### M:MegaCityOne.JusticeDepartment.GetLaws
 
- Returns a dictionary containing Laws to be advised by JudgeDredd. 
+### Constructor
 
-Returns: A Law dictionary.
+Initializes a new instance of the javascript law engine.
 
 
+### AddObject(name, target)
 
----
-# T:MegaCityOne.JudgeDredd
+Adds an object to the JavaScript engine.
 
- JudgeDredd is a Judge that uses Laws defined as lambda expressions. 
+| Name | Description |
+| ---- | ----------- |
+| name | *System.String*<br>How the object shall be called in the script. |
+| target | *System.Object*<br>The object reference to be added. |
 
+### Advise(law, arguments)
 
+Gives an advice based on a law defined in a JavaScript file. See MegaCityOne.Judge.Advise for more details.
 
----
-##### M:MegaCityOne.JudgeDredd.#ctor
+| Name | Description |
+| ---- | ----------- |
+| law | *System.String*<br>The law to be advised. |
+| arguments | *System.Object[]*<br>Any system state that could help the Judge to give a relevant advice regarding the law in question. |
 
- Instanciates JudgeDredd. 
 
+#### Returns
 
+True if the advised law is respected for the current Principal, given optional arguments. False otherwise.
 
----
-##### M:MegaCityOne.JudgeDredd.Load(System.Collections.Generic.IDictionary{System.String,MegaCityOne.Law})
 
- Loads a new set of Laws in Dredd's helmet computer. The New Laws do not invalidate existing ones systematically. Instead, they are added to Dredd's embarked artificial intelligence. Note that a new Law having the same name as a pre-existing Law will override it. 
+### IsInitialized
 
-|Name | Description |
-|-----|------|
-|newLaws: |A set of new laws to add to Dredd's embarked AI|
+Tells if JudgeAnderson internal script engine is ready to process Laws. Returns true after a Law file have been loaded. Returns false otherwise.
 
 
----
-##### M:MegaCityOne.JudgeDredd.Load(MegaCityOne.JusticeDepartment)
+### Load(file)
 
- Loads a set of laws obtained from the given JusticeDepartment. 
+Loads a law script from the specified file.
 
-|Name | Description |
-|-----|------|
-|justiceDepartment: |The JusticeDepartment containing the laws to embark in Dredd's AI.|
+| Name | Description |
+| ---- | ----------- |
+| file | *System.IO.FileInfo*<br>The file containing the javascript law to be loaded in the current principal. |
 
+### Load(reader)
 
----
-##### M:MegaCityOne.JudgeDredd.Load(System.Reflection.Assembly)
+Loads a JavaScript law file definition.
 
- Seeks all JusticeDeparment from the library and loads the Laws they contains in Dredd's AI. 
+| Name | Description |
+| ---- | ----------- |
+| reader | *System.IO.TextReader*<br>The reader containing the JavaScript code.  |
 
-|Name | Description |
-|-----|------|
-|library: |The library to search for JusticeDepartment |
+### Load(script)
 
+Loads the law script received.
 
----
-##### M:MegaCityOne.JudgeDredd.Load(System.String)
+| Name | Description |
+| ---- | ----------- |
+| script | *System.String*<br>The javascript laws applied to the current principal. |
 
- Search in the given path a library that may contains one or more JusticeDepartment. If found, adds the laws obtained to Dredd's AI. 
+### Message
 
-|Name | Description |
-|-----|------|
-|path: |The file path to the library containing the JusticeDepartment.|
+Event launched when the "message(text)" function is called from the JavaScript.
 
 
----
-##### M:MegaCityOne.JudgeDredd.Load
+### OnMessage(e)
 
- Search for a JusticeDepartment implementation in the calling library. 
+Raise the Message event.
 
+| Name | Description |
+| ---- | ----------- |
+| e | *MegaCityOne.MessageEventArgs*<br>The event arguments |
 
+## JudgeDredd
 
----
-##### M:MegaCityOne.JudgeDredd.Advise(System.String,System.Object[])
+JudgeDredd is a Judge that uses Laws defined as lambda expressions.
 
- Dredd checks with it's AI and tells if the given law is repsected or not, given the provided arguments, for the current Principal. 
 
-|Name | Description |
-|-----|------|
-|law: |The Law to be advised|
-|arguments: |Optional arguments to be evaluated.|
-Returns: 
+### Constructor
 
+Instanciates JudgeDredd.
 
 
----
-##### P:MegaCityOne.JudgeDredd.Laws
+### Advise(law, arguments)
 
- Laws contained in Dredd's embarked artificial intelligence. 
+Dredd checks with it's AI and tells if the given law is repsected or not, given the provided arguments, for the current Principal.
 
+| Name | Description |
+| ---- | ----------- |
+| law | *System.String*<br>The law to be advised. |
+| arguments | *System.Object[]*<br>Any system state that could help the Judge to give a relevant advice regarding the law in question. |
 
 
----
-# T:MegaCityOne.Law
+#### Returns
 
- Delegate used ot define a Law useable by JudgeDredd. 
+True if the advised law is respected for the current Principal, given optional arguments. False otherwise.
 
-|Name | Description |
-|-----|------|
-|principal: |The targetted principal for the given Law |
-|arguments: |An array of arguments given to the Law. Can be an empty array and content depends on the Given Law implementation.|
-Returns: True if the Law is respected, false otherwise.
 
+### Laws
 
+Laws contained in Dredd's embarked artificial intelligence.
 
----
-# T:MegaCityOne.MessageEventArgs
 
- An event argument containing a message sent by the Javascript function "message". 
+### Load
 
+Search for a JusticeDepartment implementation in the calling library.
 
 
----
-##### M:MegaCityOne.MessageEventArgs.#ctor
+### Load(justiceDepartment)
 
- Instanciate a MessageEventArgs. 
+Loads a set of laws obtained from the given JusticeDepartment.
 
+| Name | Description |
+| ---- | ----------- |
+| justiceDepartment | *MegaCityOne.JusticeDepartment*<br>The JusticeDepartment containing the laws to embark in Dredd's AI. |
 
+### Load(System.Collections.Generic.IDictionary{System.String,MegaCityOne.Law})
 
----
-##### M:MegaCityOne.MessageEventArgs.#ctor(System.String)
+Loads a new set of Laws in Dredd's helmet computer. The New Laws do not invalidate existing ones systematically. Instead, they are added to Dredd's embarked artificial intelligence. Note that a new Law having the same name as a pre-existing Law will override it.
 
- Initializes a new instance of JsMessageEventArgs. 
+| Name | Description |
+| ---- | ----------- |
+| newLaws | *Unknown type*<br>A set of new laws to add to Dredd's embarked AI |
 
-|Name | Description |
-|-----|------|
-|text: |The message text received from the internal Javascript engine.|
+### Load(library)
 
+Seeks all JusticeDeparment from the library and loads the Laws they contains in Dredd's AI.
 
----
-##### M:MegaCityOne.MessageEventArgs.ToString
+| Name | Description |
+| ---- | ----------- |
+| library | *System.Reflection.Assembly*<br>The library to search for JusticeDepartment  |
 
- Returns a string representation of the current object. 
+### Load(path)
 
-Returns: a string representation of the current object.
+Search in the given path a library that may contains one or more JusticeDepartment. If found, adds the laws obtained to Dredd's AI.
 
+| Name | Description |
+| ---- | ----------- |
+| path | *System.String*<br>The file path to the library containing the JusticeDepartment. |
 
+## JusticeDepartment
 
----
-##### P:MegaCityOne.MessageEventArgs.Text
+A JusticeDepartment instance must have a default constructor.
 
- Gets the message content. 
 
+### GetLaws
 
+Returns a dictionary containing Laws to be advised by JudgeDredd.
 
----
-# T:MegaCityOne.MessageDelegate
 
- Delegate for JsMessage passing. 
+#### Returns
 
-|Name | Description |
-|-----|------|
-|source: |The source object of the message.|
-|e: |The JsMessageEventArgs instance|
+A Law dictionary.
 
 
----
-# T:MegaCityOne.JudgeAnderson
+## Law
 
- JudgeAnderson runs an internal JavaScript interpreter to execute laws that have been defined in a Javacript file on the server. 
+Delegate used ot define a Law useable by JudgeDredd.
 
+| Name | Description |
+| ---- | ----------- |
+| principal | *Unknown type*<br>The targetted principal for the given Law  |
+| arguments | *System.Object[]*<br>An array of arguments given to the Law. Can be an empty array and content depends on the Given Law implementation. |
 
 
----
-##### M:MegaCityOne.JudgeAnderson.#ctor
+#### Returns
 
- Initializes a new instance of the javascript law engine. 
+True if the Law is respected, false otherwise.
 
 
+## LawgiverException
 
----
-##### M:MegaCityOne.JudgeAnderson.Load(System.IO.FileInfo)
+Exception launched by a Judge while Enforcing a Law.
 
- Loads a law script from the specified file. 
 
-|Name | Description |
-|-----|------|
-|file: |The file containing the javascript law to be loaded in the current principal.|
+### Constructor
 
+Instanciate a basic LawgivedException.
 
----
-##### M:MegaCityOne.JudgeAnderson.Load(System.IO.TextReader)
 
- Loads a JavaScript law file definition. 
+### Constructor(info, context)
 
-|Name | Description |
-|-----|------|
-|reader: |The reader containing the JavaScript code. |
+Instanciate a LawgiverException in a deserialization context.
 
+| Name | Description |
+| ---- | ----------- |
+| info | *System.Runtime.Serialization.SerializationInfo*<br>The serialization information. |
+| context | *System.Runtime.Serialization.StreamingContext*<br>The streaming context |
 
----
-##### M:MegaCityOne.JudgeAnderson.Load(System.String)
+### Constructor(message)
 
- Loads the law script received. 
+Instanciate a LawgiverException with the given message.
 
-|Name | Description |
-|-----|------|
-|script: |The javascript laws applied to the current principal.|
+| Name | Description |
+| ---- | ----------- |
+| message | *System.String*<br>The exception message. |
 
+### Constructor(message, inner)
 
----
-##### M:MegaCityOne.JudgeAnderson.Advise(System.String,System.Object[])
+Instanciate a Lawgiver exception with the given message and inner Exception.
 
- Gives an advice based on a law defined in a JavaScript file. See [[|M:MegaCityOne.Judge.Advise(System.String,System.Object[])]] for more details. 
+| Name | Description |
+| ---- | ----------- |
+| message | *System.String*<br> |
+| inner | *System.Exception*<br> |
 
-|Name | Description |
-|-----|------|
-|law: ||
-|arguments: ||
-Returns: 
+## MessageDelegate
 
+Delegate for JsMessage passing.
 
+| Name | Description |
+| ---- | ----------- |
+| source | *Unknown type*<br>The source object of the message. |
+| e | *MegaCityOne.MessageEventArgs*<br>The JsMessageEventArgs instance |
 
----
-##### M:MegaCityOne.JudgeAnderson.AddObject(System.String,System.Object)
+## MessageEventArgs
 
- Adds an object to the JavaScript engine. 
+An event argument containing a message sent by the Javascript function "message".
 
-|Name | Description |
-|-----|------|
-|name: |How the object shall be called in the script.|
-|Name | Description |
-|-----|------|
-|target: |The object reference to be added.|
 
+### Constructor
 
----
-##### M:MegaCityOne.JudgeAnderson.OnMessage(MegaCityOne.MessageEventArgs)
+Instanciate a MessageEventArgs.
 
- Raise the Message event. 
 
-|Name | Description |
-|-----|------|
-|e: |The event arguments|
+### Constructor(text)
 
+Initializes a new instance of JsMessageEventArgs.
 
----
-##### E:MegaCityOne.JudgeAnderson.Message
+| Name | Description |
+| ---- | ----------- |
+| text | *System.String*<br>The message text received from the internal Javascript engine. |
 
- Event launched when the "message(text)" function is called from the JavaScript. 
+### Text
 
+Gets the message content.
 
 
----
-##### P:MegaCityOne.JudgeAnderson.IsInitialized
+### ToString
 
- Tells if JudgeAnderson internal script engine is ready to process Laws. Returns true after a Law file have been loaded. Returns false otherwise. 
+Returns a string representation of the current object.
 
 
+#### Returns
 
----
-# T:MegaCityOne.LawgiverException
-
- Exception launched by a Judge while Enforcing a Law. 
-
-
-
----
-##### M:MegaCityOne.LawgiverException.#ctor
-
- Instanciate a basic LawgivedException. 
-
-
-
----
-##### M:MegaCityOne.LawgiverException.#ctor(System.String)
-
- Instanciate a LawgiverException with the given message. 
-
-|Name | Description |
-|-----|------|
-|message: |The exception message.|
-
-
----
-##### M:MegaCityOne.LawgiverException.#ctor(System.String,System.Exception)
-
- Instanciate a Lawgiver exception with the given message and inner Exception. 
-
-|Name | Description |
-|-----|------|
-|message: ||
-|Name | Description |
-|-----|------|
-|inner: ||
-
-
----
-##### M:MegaCityOne.LawgiverException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
-
- Instanciate a LawgiverException in a deserialization context. 
-
-|Name | Description |
-|-----|------|
-|info: |The serialization information.|
-|Name | Description |
-|-----|------|
-|context: |The streaming context|
-
-
----
-
+a string representation of the current object.
 
 

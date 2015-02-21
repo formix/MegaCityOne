@@ -11,6 +11,10 @@ namespace MegaCityOne
     /// </summary>
     public interface JusticeDepartment
     {
-        BookOfTheLaw GetLaws();
+        /// <summary>
+        /// Returns a dictionary containing Laws to be advised by JudgeDredd.
+        /// </summary>
+        /// <returns>A Law dictionary.</returns>
+        IDictionary<string, Law> GetLaws();
     }
 }

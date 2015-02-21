@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookOfTheLaw.cs" />
     <Compile Include="AbstractJudge.cs" />
     <Compile Include="JusticeDepartment.cs" />
     <Compile Include="JudgeDredd.cs" />
@@ -68,9 +67,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="doc\ClassDiagran.gif" />
     <Content Include="Images\MegaCityOne.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>x2md "$(TargetDir)MegaCityOne.xml" &gt; "$(ProjectDir)doc\api.md"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

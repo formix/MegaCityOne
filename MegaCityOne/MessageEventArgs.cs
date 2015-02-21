@@ -16,6 +16,9 @@ namespace MegaCityOne
         /// </summary>
         public string Text { get; private set; }
 
+        /// <summary>
+        /// Instanciate a MessageEventArgs.
+        /// </summary>
         public MessageEventArgs() : this(string.Empty)
         {
         }
@@ -30,6 +33,10 @@ namespace MegaCityOne
             this.Text = text;
         }
 
+        /// <summary>
+        /// Returns a string representation of the current object.
+        /// </summary>
+        /// <returns>a string representation of the current object.</returns>
         public override string ToString()
         {
             return string.Format("Engine message: {0}", this.Text);

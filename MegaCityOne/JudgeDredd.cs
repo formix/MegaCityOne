@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MegaCityOne
 {
+    /// <summary>
+    /// JudgeDredd is a Judge that uses Laws defined as lambda expressions.
+    /// </summary>
     public class JudgeDredd : AbstractJudge
     {
 
         #region Fields
 
-        private BookOfTheLaw laws;
+        private IDictionary<string, Law> laws;
 
         #endregion
 
@@ -22,7 +21,7 @@ namespace MegaCityOne
         /// <summary>
         /// Laws contained in Dredd's embarked artificial intelligence.
         /// </summary>
-        public virtual BookOfTheLaw Laws 
+        public virtual IDictionary<string, Law> Laws 
         {
             get { return this.laws; }
         }
@@ -31,9 +30,12 @@ namespace MegaCityOne
 
         #region Constructors
 
+        /// <summary>
+        /// Instanciates JudgeDredd.
+        /// </summary>
         public JudgeDredd()
         {
-            this.laws = new BookOfTheLaw();
+            this.laws = new Dictionary<string, Law>();
         }
 
         #endregion
@@ -48,7 +50,7 @@ namespace MegaCityOne
         /// </summary>
         /// <param name="newLaws">A set of new laws to add to Dredd's embarked 
         /// AI</param>
-        public virtual void Load(BookOfTheLaw newLaws)
+        public virtual void Load(IDictionary<string, Law> newLaws)
         {
             if (newLaws == null)
             {
@@ -100,16 +102,6 @@ namespace MegaCityOne
             }
         }
 
-
-        /// <summary>
-        /// Search for a JusticeDepartment implementation in the calling 
-        /// library.
-        /// </summary>
-        public virtual void Load()
-        {
-            this.Load(Assembly.GetCallingAssembly());
-        }
-
         /// <summary>
         /// Search in the given path a library that may contains one or more 
         /// JusticeDepartment. If found, adds the laws obtained to Dredd's AI.
@@ -128,12 +120,23 @@ namespace MegaCityOne
         }
 
         /// <summary>
+        /// Search for a JusticeDepartment implementation in the calling 
+        /// library.
+        /// </summary>
+        public void Load()
+        {
+            this.Load(Assembly.GetCallingAssembly());
+        }
+
+        /// <summary>
         /// Dredd checks with it's AI and tells if the given law is repsected 
         /// or not, given the provided arguments, for the current Principal.
         /// </summary>
-        /// <param name="law">The Law to be advised</param>
-        /// <param name="arguments">Optional arguments to be evaluated.</param>
-        /// <returns></returns>
+        /// <param name="law">The law to be advised.</param>
+        /// <param name="arguments">Any system state that could help the 
+        /// Judge to give a relevant advice regarding the law in question.</param>
+        /// <returns>True if the advised law is respected for the current Principal, 
+        /// given optional arguments. False otherwise.</returns>
         public override bool Advise(string law, params object[] arguments)
         {
             if (string.IsNullOrEmpty(law.Trim()))

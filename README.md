@@ -21,6 +21,11 @@ command line:
 
 > Install-Package MegaCityOne
 
+# Documentation
+
+* [Api Reference](https://github.com/formix/MegaCityOne/blob/master/MegaCityOne/doc/api.md)
+* [Class Diagram](https://raw.githubusercontent.com/formix/MegaCityOne/master/MegaCityOne/doc/ClassDiagram.gif)
+
 # Usage
 
 ## Authentication

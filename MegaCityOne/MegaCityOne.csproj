@@ -67,7 +67,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="doc\ClassDiagran.gif" />
+    <Content Include="doc\ClassDiagram.gif" />
     <Content Include="Images\MegaCityOne.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

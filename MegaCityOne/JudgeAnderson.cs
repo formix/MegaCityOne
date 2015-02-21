@@ -12,9 +12,8 @@ using System.Threading;
 namespace MegaCityOne
 {
     /// <summary>
-    /// JudgeAnderson runs an internal JavaScript interpreter (namely Jint)
-    /// to execute laws that have been defined in a Javacript file on the 
-    /// server.
+    /// JudgeAnderson runs an internal JavaScript interpreter to execute laws
+    /// that have been defined in a Javacript file on the server.
     /// </summary>
     public class JudgeAnderson : AbstractJudge
     {
@@ -43,6 +42,11 @@ namespace MegaCityOne
 
         #region Properties
 
+        /// <summary>
+        /// Tells if JudgeAnderson internal script engine is ready to process
+        /// Laws. Returns true after a Law file have been loaded. Returns 
+        /// false otherwise.
+        /// </summary>
         public virtual bool IsInitialized 
         { 
             get
@@ -58,7 +62,6 @@ namespace MegaCityOne
         /// <summary>
         /// Initializes a new instance of the javascript law engine.
         /// </summary>
-        /// <param name="principal"></param>
         public JudgeAnderson()
         {
             this.engine = null;
@@ -68,31 +71,6 @@ namespace MegaCityOne
 
         #region Methods
 
-
-        /// <summary>
-        /// Adds an object to the JavaScript engine.
-        /// </summary>
-        /// <param name="name">How the object shall be called in the script.</param>
-        /// <param name="target">The object reference to be added.</param>
-        public virtual void AddObject(string name, object target)
-        {
-            if (!this.IsInitialized)
-            {
-                throw new InvalidOperationException("Cannot add an object the Javascript Engine befaur loading a script!");
-            }
-
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentException("Argument 'name' cannot be null, empty or contains only spaces");
-            }
-
-            if (target == null)
-            {
-                throw new ArgumentNullException("target");
-            }
-
-            this.engine.SetValue(name, target);
-        }
 
         /// <summary>
         /// Loads a law script from the specified file.
@@ -156,11 +134,13 @@ namespace MegaCityOne
 
         /// <summary>
         /// Gives an advice based on a law defined in a JavaScript file.
-        /// See <see cref="MegaCityOne.Judge.Advise"/> for more details.
+        /// See MegaCityOne.Judge.Advise for more details.
         /// </summary>
-        /// <param name="law"></param>
-        /// <param name="arguments"></param>
-        /// <returns></returns>
+        /// <param name="law">The law to be advised.</param>
+        /// <param name="arguments">Any system state that could help the 
+        /// Judge to give a relevant advice regarding the law in question.</param>
+        /// <returns>True if the advised law is respected for the current Principal, 
+        /// given optional arguments. False otherwise.</returns>
         public override bool Advise(string law, params object[] arguments)
         {
             if (this.engine == null)
@@ -184,9 +164,34 @@ namespace MegaCityOne
         }
 
         /// <summary>
+        /// Adds an object to the JavaScript engine.
+        /// </summary>
+        /// <param name="name">How the object shall be called in the script.</param>
+        /// <param name="target">The object reference to be added.</param>
+        public virtual void AddObject(string name, object target)
+        {
+            if (!this.IsInitialized)
+            {
+                throw new InvalidOperationException("Cannot add an object to the Javascript Engine befor loading a script!");
+            }
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("Argument 'name' cannot be null, empty or contain any spaces");
+            }
+
+            if (target == null)
+            {
+                throw new ArgumentNullException("target");
+            }
+
+            this.engine.SetValue(name, target);
+        }
+
+        /// <summary>
         /// Raise the Message event.
         /// </summary>
-        /// <param name="">The event data</param>
+        /// <param name="e">The event arguments</param>
         protected virtual void OnMessage(MessageEventArgs e)
         {
             if (this.Message != null)

@@ -9,9 +9,9 @@ namespace AssemblyWithJusticeDepartment
 {
     public class MyJusticeDepartment : JusticeDepartment
     {
-        public BookOfTheLaw GetLaws()
+        public IDictionary<string, Law> GetLaws()
         {
-            BookOfTheLaw laws = new BookOfTheLaw();
+            var laws = new Dictionary<string, Law>();
             laws.Add("CanWithdrawFromAccount", (principal, arguments) =>
                 principal.IsInRole("BankUser") &&
                     (((BankAccount)arguments[0]).Owner == principal.Identity.Name));

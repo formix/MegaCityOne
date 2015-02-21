@@ -15,6 +15,8 @@ This Project uses [Semantic Versioning](http://semver.org/).
 
 # Installation
 
+Megacity one is available on [Nuget.org](https://www.nuget.org/packages/MegaCityOne/)
+
 > Install-Package MegaCityOne
 
 # Usage

@@ -13,6 +13,10 @@ Windows Advanced Authorization System
 
 This Project uses [Semantic Versioning](http://semver.org/).
 
+# Installation
+
+> Install-Package MegaCityOne
+
 # Usage
 
 ## Authentication

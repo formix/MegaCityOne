@@ -32,9 +32,11 @@ command line:
 
 As stated in the premice, MegaCityOne has nothing to do with authentication.
 You can use known libraries like 
-[Owin](https://www.nuget.org/packages/Microsoft.Owin.Security.OAuth/) or 
-[ASP.NET Authentication](https://msdn.microsoft.com/en-us/library/eeyk640h%28v=vs.140%29.aspx) 
-to handle that.
+[Owin](https://www.nuget.org/packages/Microsoft.Owin.Security.OAuth/) which have a 
+few things about authentication available or 
+[MVC5 Authentication Filters](http://www.dotnetcurry.com/showarticle.aspx?ID=957).
+Starting an MVC5 application in Visual Studio gives a quite filled template
+haveing a Login screen and some Owin code to handle Authentication.
 
 ### Web Application
 

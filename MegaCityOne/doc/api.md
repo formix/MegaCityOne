@@ -31,7 +31,7 @@ Standard Law enforcement inplementation. This implementation will advise the giv
 | law | *System.String*<br>The name of a Law to be interpreted by the Judge. |
 | arguments | *System.Object[]*<br>Optional arguments given to the Judge to interpret a Law properly. |
 
-<span style='color:red'>*LawgiverException:*</span> Thrown when the given Law advise falsely with the optional arguments.
+*LawgiverException:* Thrown when the given Law advise falsely with the optional arguments.
 
 
 ### Principal
@@ -73,7 +73,7 @@ The Judge is in a situation where he have to give a Life or Death sentence regar
 | law | *System.String*<br>The law to be enforced. |
 | arguments | *System.Object[]*<br>Any system state that could help the Judge to give a relevant sentence regarding the law in question. |
 
-<span style='color:red'>*LawgiverException:*</span>  Inherited from System.Security.SecurityException. This exceptions is thrown at the face of current Principal if he is breaking the given law.
+*LawgiverException:*  Inherited from System.Security.SecurityException. This exceptions is thrown at the face of current Principal if he is breaking the given law.
 
 
 ### Principal

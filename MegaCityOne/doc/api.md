@@ -332,3 +332,60 @@ Returns a string representation of the current object.
 a string representation of the current object.
 
 
+## MVC.Dispatcher
+
+The dispatcher is responsible to check if a Judge is available for the current thread. If no Judge is available, a Judge will be summoned and assigned to the thread ID for later usage. You can see the Dispatcher as a JudgePool. This class is a singleton and cannot be instanciated. You must use the static member "Current" to use this class.
+
+
+### Current
+
+The static dispatcher instance for the current application.
+
+
+### Dispatch
+
+Calling the dispatch method can trigger the JudgeSummon event if there is no Judge associated with the calling thread id. If this is the case, it is assumed that an event handler will create a Judge and asign it to the JudgeSummonEventArgs.Respondent property for later use with the given thread. Otherwise, return the existing Judge associated with the calling thread id.
+
+
+#### Returns
+
+The designated Judge for the calling thread id.
+
+
+### OnSummon(e)
+
+Method used to fire a JudgeSummon event.
+
+| Name | Description |
+| ---- | ----------- |
+| e | *MegaCityOne.MVC.SummonEventArgs*<br>The event arguments. |
+
+### Summon
+
+Event fired when there is no Judge available for the current thread id.
+
+
+## MVC.SummonDelegate
+
+This delegate is used to define a JudegSummon event.
+
+| Name | Description |
+| ---- | ----------- |
+| source | *Unknown type*<br>The source of the event. |
+| e | *MegaCityOne.MVC.SummonEventArgs*<br>The Judge summon event args. |
+
+## MVC.SummonEventArgs
+
+Event arguments for JudgeSummon event.
+
+
+### Constructor
+
+Creates an instance of JudgeSummonEventArgs.
+
+
+### Respondent
+
+The Judge who answers the summoning from the Dispatcher.
+
+

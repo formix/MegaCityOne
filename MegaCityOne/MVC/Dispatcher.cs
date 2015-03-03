@@ -7,11 +7,23 @@ using System.Threading.Tasks;
 
 namespace MegaCityOne.MVC
 {
-    public class Dispatcher
+    /// <summary>
+    /// The dispatcher is responsible to check if a Judge is available for 
+    /// the current thread. If no Judge is available, a Judge will be 
+    /// summoned and assigned to the thread ID for later usage. You can see 
+    /// the Dispatcher as a JudgePool. This class is a singleton and cannot 
+    /// be instanciated. You must use the static member "Current" to use this 
+    /// class.
+    /// </summary>
+    public sealed class Dispatcher
     {
-        #region Internal types
+        #region Events
 
-        public delegate Judge Convocation();
+        /// <summary>
+        /// Event fired when there is no Judge available for the current 
+        /// thread id.
+        /// </summary>
+        public event SummonDelegate Summon;
 
         #endregion
 
@@ -20,12 +32,14 @@ namespace MegaCityOne.MVC
         private static Dispatcher current = null;
 
         private IDictionary<int, Judge> judges;
-        private Convocation convocationMethod;
 
         #endregion
 
         #region Properties
 
+        /// <summary>
+        /// The static dispatcher instance for the current application.
+        /// </summary>
         public static Dispatcher Current
         {
             get
@@ -38,20 +52,12 @@ namespace MegaCityOne.MVC
             }
         }
 
-
-        public Convocation ConvocationMethod 
-        {
-            get { return this.convocationMethod; }
-            set { this.convocationMethod = value; }
-        }
-
         #endregion
 
         #region Constructors
 
         private Dispatcher()
         {
-            this.convocationMethod = () => null;
             this.judges = new Dictionary<int, Judge>();
         }
 
@@ -59,21 +65,43 @@ namespace MegaCityOne.MVC
 
         #region Methods
 
+        /// <summary>
+        /// Calling the dispatch method can trigger the JudgeSummon event if 
+        /// there is no Judge associated with the calling thread id. If this 
+        /// is the case, it is assumed that an event handler will create a 
+        /// Judge and asign it to the JudgeSummonEventArgs.Respondent property 
+        /// for later use with the given thread. Otherwise, return the 
+        /// existing Judge associated with the calling thread id.
+        /// </summary>
+        /// <returns>The designated Judge for the calling thread id.</returns>
         public Judge Dispatch()
         {
             Judge judge = null;
             lock (this.judges) {
                 if (!this.judges.ContainsKey(Thread.CurrentThread.ManagedThreadId)) {
-                    var newJudge = this.convocationMethod();
-                    if (judge == null)
+                    SummonEventArgs e = new SummonEventArgs();
+                    this.OnSummon(e);
+                    if (e.Respondent == null)
                     {
-                        throw new InvalidOperationException("The Judge ConvocationMethod returned null or is not defined.");
+                        throw new InvalidOperationException("The Judge summoning returned null.");
                     }
-                    this.judges[Thread.CurrentThread.ManagedThreadId] = newJudge;
+                    this.judges[Thread.CurrentThread.ManagedThreadId] = e.Respondent;
                 }
                 judge = this.judges[Thread.CurrentThread.ManagedThreadId];
             }
             return judge;
+        }
+
+        /// <summary>
+        /// Method used to fire a JudgeSummon event.
+        /// </summary>
+        /// <param name="e">The event arguments.</param>
+        private void OnSummon(SummonEventArgs e)
+        {
+            if (this.Summon != null)
+            {
+                this.Summon(this, e);
+            }
         }
 
         #endregion

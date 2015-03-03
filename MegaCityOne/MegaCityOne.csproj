@@ -61,6 +61,8 @@
     <Compile Include="Judge.cs" />
     <Compile Include="JudgeAnderson.cs" />
     <Compile Include="LawgiverException.cs" />
+    <Compile Include="MVC\SummonEventArgs.cs" />
+    <Compile Include="MVC\SummonDelegate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -19,7 +19,7 @@ namespace MegaCityOne.Tests
         /// Test to see if a simple law works well.
         /// </summary>
         [TestMethod]
-        public void TestSimpleCompiledRuleSuccess()
+        public void SimpleCompiledRuleSuccess()
         {
             JudgeDredd judge = new JudgeDredd();
             judge.Laws.Add("CanSeeBankAccount", 
@@ -38,7 +38,7 @@ namespace MegaCityOne.Tests
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(LawgiverException))]
-        public void TestSimpleCompiledRuleFail()
+        public void SimpleCompiledRuleFail()
         {
             JudgeDredd judge = new JudgeDredd();
             judge.Laws.Add("CanSeeBankAccount",
@@ -57,7 +57,7 @@ namespace MegaCityOne.Tests
         public void LoadLawsFromAnotherAssembly()
         {
             JudgeDredd judge = new JudgeDredd();
-            judge.Load("../../../AssemblyWithJusticeDepartment/bin/debug/AssemblyWithJusticeDepartment.dll");
+            judge.Load("../../../MegaCityOne.Tests.JusticeDepartment/bin/debug/MegaCityOne.Tests.JusticeDepartment.dll");
             Assert.AreEqual(3, judge.Laws.Count);
         }
     }

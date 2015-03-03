@@ -344,7 +344,7 @@ The static dispatcher instance for the current application.
 
 ### Dispatch
 
-Calling the dispatch method can trigger the JudgeSummon event if there is no Judge associated with the calling thread id. If this is the case, it is assumed that an event handler will create a Judge and asign it to the JudgeSummonEventArgs.Respondent property for later use with the given thread. Otherwise, return the existing Judge associated with the calling thread id.
+Calling the dispatch method can trigger the Summon event if there is no Judge associated with the calling thread id. If this is the case, it is assumed that an event handler will create a Judge and asign it to the SummonEventArgs.Respondent property for later use with the given thread. Otherwise, return the existing Judge associated with the calling thread id.
 
 
 #### Returns
@@ -354,7 +354,7 @@ The designated Judge for the calling thread id.
 
 ### OnSummon(e)
 
-Method used to fire a JudgeSummon event.
+Method used to fire a Summon event.
 
 | Name | Description |
 | ---- | ----------- |

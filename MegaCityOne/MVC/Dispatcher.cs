@@ -66,10 +66,10 @@ namespace MegaCityOne.MVC
         #region Methods
 
         /// <summary>
-        /// Calling the dispatch method can trigger the JudgeSummon event if 
+        /// Calling the dispatch method can trigger the Summon event if 
         /// there is no Judge associated with the calling thread id. If this 
         /// is the case, it is assumed that an event handler will create a 
-        /// Judge and asign it to the JudgeSummonEventArgs.Respondent property 
+        /// Judge and asign it to the SummonEventArgs.Respondent property 
         /// for later use with the given thread. Otherwise, return the 
         /// existing Judge associated with the calling thread id.
         /// </summary>
@@ -93,7 +93,7 @@ namespace MegaCityOne.MVC
         }
 
         /// <summary>
-        /// Method used to fire a JudgeSummon event.
+        /// Method used to fire a Summon event.
         /// </summary>
         /// <param name="e">The event arguments.</param>
         private void OnSummon(SummonEventArgs e)

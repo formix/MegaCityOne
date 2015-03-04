@@ -332,7 +332,7 @@ Returns a string representation of the current object.
 a string representation of the current object.
 
 
-## MVC.Dispatcher
+## Mvc.Dispatcher
 
 The dispatcher is responsible to check if a Judge is available for the current thread. If no Judge is available, a Judge will be summoned and assigned to the thread ID for later usage. You can see the Dispatcher as a JudgePool. This class is a singleton and cannot be instanciated. You must use the static member "Current" to use this class.
 
@@ -358,23 +358,52 @@ Method used to fire a Summon event.
 
 | Name | Description |
 | ---- | ----------- |
-| e | *MegaCityOne.MVC.SummonEventArgs*<br>The event arguments. |
+| e | *MegaCityOne.Mvc.SummonEventArgs*<br>The event arguments. |
 
 ### Summon
 
-Event fired when there is no Judge available for the current thread id.
+Event fired when there is no Judge available for the current thread id. The event handler is expected to create a Judge, provide it with laws and attach it the the event args.
 
 
-## MVC.SummonDelegate
+## Mvc.JudgeAuthorizeAttribute
+
+This attribute implements a Judge Authorization to use a controller's method. The rule to be advised is mandatory. Note that the Users and Roles properties from the base AuthorizeAttribute are ignored by this specialization of AuthorizeAttribute.
+
+
+### Constructor
+
+Creates an instance of a JudgeAuthorizeAttribute.
+
+
+### AuthorizeCore(httpContext)
+
+Calls the Advise method of the Judge returned by the Dispatcher.Dispatch() method with the Rule property as the first Advise parameter and the given httpContext as the second Advise parameter.
+
+| Name | Description |
+| ---- | ----------- |
+| httpContext | *System.Web.HttpContextBase*<br>The http context of the current controller method call. This parameter will be passed to the Judge.Advise method as the first and only argument. |
+
+
+#### Returns
+
+The Judge.Advise result.
+
+
+### Rule
+
+The rule to be advised by the Judge upon authorization request.
+
+
+## Mvc.SummonDelegate
 
 This delegate is used to define a JudegSummon event.
 
 | Name | Description |
 | ---- | ----------- |
 | source | *Unknown type*<br>The source of the event. |
-| e | *MegaCityOne.MVC.SummonEventArgs*<br>The Judge summon event args. |
+| e | *MegaCityOne.Mvc.SummonEventArgs*<br>The Judge summon event args. |
 
-## MVC.SummonEventArgs
+## Mvc.SummonEventArgs
 
 Event arguments for JudgeSummon event.
 

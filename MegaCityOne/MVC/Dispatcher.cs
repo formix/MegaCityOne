@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MegaCityOne.MVC
+namespace MegaCityOne.Mvc
 {
     /// <summary>
     /// The dispatcher is responsible to check if a Judge is available for 
@@ -21,7 +21,8 @@ namespace MegaCityOne.MVC
 
         /// <summary>
         /// Event fired when there is no Judge available for the current 
-        /// thread id.
+        /// thread id. The event handler is expected to create a Judge,
+        /// provide it with laws and attach it the the event args.
         /// </summary>
         public event SummonDelegate Summon;
 

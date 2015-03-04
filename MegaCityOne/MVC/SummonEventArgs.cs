@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MegaCityOne.MVC
+namespace MegaCityOne.Mvc
 {
     /// <summary>
     /// Event arguments for JudgeSummon event.

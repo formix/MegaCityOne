@@ -360,7 +360,7 @@ Method used to fire a Summon event.
 | ---- | ----------- |
 | e | *MegaCityOne.Mvc.SummonEventArgs*<br>The event arguments. |
 
-### Return(judge)
+### Returns(judge)
 
 Thread safe. Returns a dispatched judge to the pool. This method do not accept a judge that have not been dispatched by the current instance of the dispatcher.
 

@@ -45,7 +45,7 @@ namespace MegaCityOne.Mvc
         {
             Judge judge = Dispatcher.Current.Dispatch();
             bool advisal = judge.Advise(this.Rule, httpContext);
-            Dispatcher.Current.Return(judge);
+            Dispatcher.Current.Returns(judge);
             return advisal;
         }
     }

@@ -34,7 +34,7 @@ namespace MegaCityOne.Mvc
         private static Dispatcher current = null;
 
         private Stack<Judge> judgePool;
-        private HashSet<Judge> dispatchedJudges;
+        private HashSet<int> dispatchedJudges;
 
         #endregion
 
@@ -62,7 +62,7 @@ namespace MegaCityOne.Mvc
         private Dispatcher()
         {
             this.judgePool = new Stack<Judge>();
-            this.dispatchedJudges = new HashSet<Judge>();
+            this.dispatchedJudges = new HashSet<int>();
         }
 
         #endregion
@@ -93,7 +93,7 @@ namespace MegaCityOne.Mvc
                     this.judgePool.Push(e.Respondent);
                 }
                 judge = this.judgePool.Pop();
-                this.dispatchedJudges.Add(judge);
+                this.dispatchedJudges.Add(judge.GetHashCode());
             }
             return judge;
         }
@@ -105,23 +105,23 @@ namespace MegaCityOne.Mvc
         /// </summary>
         /// <param name="judge">The judge that answered a previous call to 
         /// Dispatch.</param>
-        public void Return(Judge judge)
+        public void Returns(Judge judge)
         {
-            if (judge == null)
-            {
-                throw new ArgumentNullException("judge");
-            }
-
-            if (!this.dispatchedJudges.Contains(judge))
-            {
-                throw new ArgumentException(
-                    "The judge received have not been dispatched by an " +
-                    "earlier call to Dispatch()");
-            }
-
             lock (this.judgePool)
             {
-                this.dispatchedJudges.Remove(judge);
+                if (judge == null)
+                {
+                    throw new ArgumentNullException("judge");
+                }
+
+                if (!this.dispatchedJudges.Contains(judge.GetHashCode()))
+                {
+                    throw new ArgumentException(
+                        "The judge received have not been dispatched by an " +
+                        "earlier call to Dispatch()");
+                }
+
+                this.dispatchedJudges.Remove(judge.GetHashCode());
                 this.judgePool.Push(judge);
             }
         }

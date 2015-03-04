@@ -367,7 +367,7 @@ Event fired when there is no Judge available for the current thread id. The even
 
 ## Mvc.JudgeAuthorizeAttribute
 
-This attribute implements a Judge Authorization to use a controller's method. The rule to be advised is mandatory. Note that the Users and Roles properties from the base AuthorizeAttribute are ignored by this specialization of AuthorizeAttribute.
+This attribute leverage MegaCityOne's Judge security for MVC applications. The rule to be advised is mandatory. Note that the Users and Roles properties from the base AuthorizeAttribute are ignored by this specialization of AuthorizeAttribute.
 
 
 ### Constructor
@@ -396,7 +396,7 @@ The rule to be advised by the Judge upon authorization request.
 
 ## Mvc.SummonDelegate
 
-This delegate is used to define a JudegSummon event.
+This delegate is used to define a Summon event.
 
 | Name | Description |
 | ---- | ----------- |
@@ -405,12 +405,12 @@ This delegate is used to define a JudegSummon event.
 
 ## Mvc.SummonEventArgs
 
-Event arguments for JudgeSummon event.
+Event arguments for a Dispatcher.Summon event.
 
 
 ### Constructor
 
-Creates an instance of JudgeSummonEventArgs.
+Creates an instance of SummonEventArgs.
 
 
 ### Respondent

@@ -10,8 +10,8 @@ using System.Web.Mvc;
 namespace MegaCityOne.Mvc
 {
     /// <summary>
-    /// This attribute implements a Judge Authorization to use a controller's
-    /// method. The rule to be advised is mandatory. Note that the Users and 
+    /// This attribute leverage MegaCityOne's Judge security for MVC 
+    /// applications. The rule to be advised is mandatory. Note that the Users and 
     /// Roles properties from the base AuthorizeAttribute are ignored by this
     /// specialization of AuthorizeAttribute.
     /// </summary>

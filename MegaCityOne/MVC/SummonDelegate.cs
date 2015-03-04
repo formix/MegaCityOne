@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MegaCityOne.Mvc
 {
     /// <summary>
-    /// This delegate is used to define a JudegSummon event.
+    /// This delegate is used to define a Summon event.
     /// </summary>
     /// <param name="source">The source of the event.</param>
     /// <param name="e">The Judge summon event args.</param>

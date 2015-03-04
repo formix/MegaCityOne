@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MegaCityOne.Mvc
 {
     /// <summary>
-    /// Event arguments for JudgeSummon event.
+    /// Event arguments for a Dispatcher.Summon event.
     /// </summary>
     public class SummonEventArgs : EventArgs
     {
@@ -17,7 +17,7 @@ namespace MegaCityOne.Mvc
         public Judge Respondent { get; set; }
 
         /// <summary>
-        /// Creates an instance of JudgeSummonEventArgs.
+        /// Creates an instance of SummonEventArgs.
         /// </summary>
         public SummonEventArgs()
         {

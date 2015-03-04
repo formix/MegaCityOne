@@ -1,7 +1,7 @@
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MegaCityOne.Example.MVC.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(MegaCityOne.Example.MVC.App_Start.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MegaCityOne.Example.Mvc.App_Start.NinjectWebCommon), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(MegaCityOne.Example.Mvc.App_Start.NinjectWebCommon), "Stop")]
 
-namespace MegaCityOne.Example.MVC.App_Start
+namespace MegaCityOne.Example.Mvc.App_Start
 {
     using MCV.Skeleton.Infrastructure;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;

@@ -9,11 +9,12 @@ namespace MegaCityOne.Mvc
 {
     /// <summary>
     /// The dispatcher is responsible to check if a Judge is available for 
-    /// the current thread. If no Judge is available, a Judge will be 
-    /// summoned and assigned to the thread ID for later usage. You can see 
-    /// the Dispatcher as a JudgePool. This class is a singleton and cannot 
-    /// be instanciated. You must use the static member "Current" to use this 
-    /// class.
+    /// the call. If no Judge is available, a Judge will be summoned. 
+    /// Dispatched Judges must be returned to the pool by using the 
+    /// Dispatcher.Return method. Otherwise, the Dispatch method will summon 
+    /// a new Judge on each call. The Dispatcher as a JudgePool. This class is 
+    /// a singleton and cannot be instanciated. You must use the static 
+    /// member Dispatcher.Current to use an instance of this class.
     /// </summary>
     public sealed class Dispatcher
     {
@@ -32,7 +33,8 @@ namespace MegaCityOne.Mvc
 
         private static Dispatcher current = null;
 
-        private IDictionary<int, Judge> judges;
+        private Stack<Judge> judgePool;
+        private HashSet<Judge> dispatchedJudges;
 
         #endregion
 
@@ -59,7 +61,8 @@ namespace MegaCityOne.Mvc
 
         private Dispatcher()
         {
-            this.judges = new Dictionary<int, Judge>();
+            this.judgePool = new Stack<Judge>();
+            this.dispatchedJudges = new HashSet<Judge>();
         }
 
         #endregion
@@ -67,30 +70,60 @@ namespace MegaCityOne.Mvc
         #region Methods
 
         /// <summary>
-        /// Calling the dispatch method can trigger the Summon event if 
-        /// there is no Judge associated with the calling thread id. If this 
-        /// is the case, it is assumed that an event handler will create a 
-        /// Judge and asign it to the SummonEventArgs.Respondent property 
-        /// for later use with the given thread. Otherwise, return the 
-        /// existing Judge associated with the calling thread id.
+        /// Thread safe. Calling the dispatch method can trigger the Summon 
+        /// event if there is no Judge available in the pool. If this 
+        /// is the case, it is assumed that a Summon event handler will create 
+        /// a Judge and asign it to the SummonEventArgs.Respondent property. 
+        /// Otherwise, return an existing Judge from the pool.
         /// </summary>
-        /// <returns>The designated Judge for the calling thread id.</returns>
+        /// <returns>A Judge available to answer the call.</returns>
         public Judge Dispatch()
         {
             Judge judge = null;
-            lock (this.judges) {
-                if (!this.judges.ContainsKey(Thread.CurrentThread.ManagedThreadId)) {
+            lock (this.judgePool)
+            {
+                if (this.judgePool.Count == 0)
+                {
                     SummonEventArgs e = new SummonEventArgs();
                     this.OnSummon(e);
                     if (e.Respondent == null)
                     {
                         throw new InvalidOperationException("The Judge summoning returned null.");
                     }
-                    this.judges[Thread.CurrentThread.ManagedThreadId] = e.Respondent;
+                    this.judgePool.Push(e.Respondent);
                 }
-                judge = this.judges[Thread.CurrentThread.ManagedThreadId];
+                judge = this.judgePool.Pop();
+                this.dispatchedJudges.Add(judge);
             }
             return judge;
+        }
+
+        /// <summary>
+        /// Thread safe. Returns a dispatched judge to the pool. This method 
+        /// do not accept a judge that have not been dispatched by the 
+        /// current instance of the dispatcher.
+        /// </summary>
+        /// <param name="judge">The judge that answered a previous call to 
+        /// Dispatch.</param>
+        public void Return(Judge judge)
+        {
+            if (judge == null)
+            {
+                throw new ArgumentNullException("judge");
+            }
+
+            if (!this.dispatchedJudges.Contains(judge))
+            {
+                throw new ArgumentException(
+                    "The judge received have not been dispatched by an " +
+                    "earlier call to Dispatch()");
+            }
+
+            lock (this.judgePool)
+            {
+                this.dispatchedJudges.Remove(judge);
+                this.judgePool.Push(judge);
+            }
         }
 
         /// <summary>

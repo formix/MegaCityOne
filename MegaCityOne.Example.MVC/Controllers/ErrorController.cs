@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace MegaCityOne.Example.MVC.Controllers
+namespace MegaCityOne.Example.Mvc.Controllers
 {
     public class ErrorController : Controller
     {

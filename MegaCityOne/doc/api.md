@@ -334,7 +334,7 @@ a string representation of the current object.
 
 ## Mvc.Dispatcher
 
-The dispatcher is responsible to check if a Judge is available for the current thread. If no Judge is available, a Judge will be summoned and assigned to the thread ID for later usage. You can see the Dispatcher as a JudgePool. This class is a singleton and cannot be instanciated. You must use the static member "Current" to use this class.
+The dispatcher is responsible to check if a Judge is available for the call. If no Judge is available, a Judge will be summoned. Dispatched Judges must be returned to the pool by using the Dispatcher.Return method. Otherwise, the Dispatch method will summon a new Judge on each call. The Dispatcher as a JudgePool. This class is a singleton and cannot be instanciated. You must use the static member Dispatcher.Current to use an instance of this class.
 
 
 ### Current
@@ -344,12 +344,12 @@ The static dispatcher instance for the current application.
 
 ### Dispatch
 
-Calling the dispatch method can trigger the Summon event if there is no Judge associated with the calling thread id. If this is the case, it is assumed that an event handler will create a Judge and asign it to the SummonEventArgs.Respondent property for later use with the given thread. Otherwise, return the existing Judge associated with the calling thread id.
+Thread safe. Calling the dispatch method can trigger the Summon event if there is no Judge available in the pool. If this is the case, it is assumed that a Summon event handler will create a Judge and asign it to the SummonEventArgs.Respondent property. Otherwise, return an existing Judge from the pool.
 
 
 #### Returns
 
-The designated Judge for the calling thread id.
+A Judge available to answer the call.
 
 
 ### OnSummon(e)
@@ -359,6 +359,14 @@ Method used to fire a Summon event.
 | Name | Description |
 | ---- | ----------- |
 | e | *MegaCityOne.Mvc.SummonEventArgs*<br>The event arguments. |
+
+### Return(judge)
+
+Thread safe. Returns a dispatched judge to the pool. This method do not accept a judge that have not been dispatched by the current instance of the dispatcher.
+
+| Name | Description |
+| ---- | ----------- |
+| judge | *MegaCityOne.Judge*<br>The judge that answered a previous call to Dispatch. |
 
 ### Summon
 

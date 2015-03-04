@@ -4,22 +4,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MegaCityOne.Example.MVC
+namespace MegaCityOne.Example.Mvc
 {
     public class JudgeConfig
     {
         public static void RegisterJudge(Dispatcher dispatcher)
         {
-            dispatcher.Summon += dispatcher_JudgeSummon;
+            dispatcher.Summon += dispatcher_Summon;
         }
 
-        static void dispatcher_JudgeSummon(object source, SummonEventArgs e)
+
+        static void dispatcher_Summon(object source, SummonEventArgs e)
         {
             JudgeDredd dredd = new JudgeDredd();
-            dredd.Laws.Add("IsDomainUser", (principal, arguments) =>
+            dredd.Laws.Add("IsLocalAdmin", (principal, arguments) =>
             {
-                string domain = Environment.GetEnvironmentVariable("USERDOMAIN");
-                string domainUsers = domain + "\\Users";
+                string domain = Environment.GetEnvironmentVariable("COMPUTERNAME");
+                string domainUsers = domain + "\\Administrators";
                 return principal.IsInRole(domainUsers);
             });
             e.Respondent = dredd;

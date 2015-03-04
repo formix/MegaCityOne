@@ -44,7 +44,9 @@ namespace MegaCityOne.Mvc
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             Judge judge = Dispatcher.Current.Dispatch();
-            return judge.Advise(this.Rule, httpContext);
+            bool advisal = judge.Advise(this.Rule, httpContext);
+            Dispatcher.Current.Return(judge);
+            return advisal;
         }
     }
 }

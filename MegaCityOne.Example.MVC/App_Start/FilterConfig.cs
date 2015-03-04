@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace MegaCityOne.Example.MVC
+namespace MegaCityOne.Example.Mvc
 {
     public class FilterConfig
     {

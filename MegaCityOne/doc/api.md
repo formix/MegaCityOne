@@ -375,27 +375,21 @@ Event fired when there is no Judge available for the current thread id. The even
 
 ## Mvc.JudgeAuthorizeAttribute
 
-This attribute leverage MegaCityOne's Judge security for MVC applications. The rule to be advised is mandatory. Note that the Users and Roles properties from the base AuthorizeAttribute are ignored by this specialization of AuthorizeAttribute.
+This attribute leverage MegaCityOne's Judge security for MVC applications. The rule to be advised is mandatory.
 
 
-### Constructor
+### Constructor(System.String)
 
 Creates an instance of a JudgeAuthorizeAttribute.
 
 
-### AuthorizeCore(httpContext)
+### OnAuthorization(filterContext)
 
-Calls the Advise method of the Judge returned by the Dispatcher.Dispatch() method with the Rule property as the first Advise parameter and the given httpContext as the second Advise parameter.
+This method executes authorization based on the Judge returned by the MegaCityOne.Mvc.Dispatcher.
 
 | Name | Description |
 | ---- | ----------- |
-| httpContext | *System.Web.HttpContextBase*<br>The http context of the current controller method call. This parameter will be passed to the Judge.Advise method as the first and only argument. |
-
-
-#### Returns
-
-The Judge.Advise result.
-
+| filterContext | *System.Web.Mvc.AuthorizationContext*<br>The authorization context. |
 
 ### Rule
 

@@ -7,7 +7,7 @@ namespace MegaCityOne.Example.Mvc.Controllers
     [DummyAuthAttribute]
     public class HomeController : Controller
     {
-        [JudgeAuthorize(Rule = "CanDisplayMainPage")]
+        [JudgeAuthorize("CanDisplayMainPage")]
         public ActionResult Index()
         {
             return View();

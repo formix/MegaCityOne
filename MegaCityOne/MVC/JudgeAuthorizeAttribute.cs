@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
+using System.Security.Principal;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -11,12 +13,10 @@ namespace MegaCityOne.Mvc
 {
     /// <summary>
     /// This attribute leverage MegaCityOne's Judge security for MVC 
-    /// applications. The rule to be advised is mandatory. Note that the Users and 
-    /// Roles properties from the base AuthorizeAttribute are ignored by this
-    /// specialization of AuthorizeAttribute.
+    /// applications. The rule to be advised is mandatory. 
     /// </summary>
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public class JudgeAuthorizeAttribute : AuthorizeAttribute
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+    public class JudgeAuthorizeAttribute : FilterAttribute, IAuthorizationFilter
     {
         /// <summary>
         /// The rule to be advised by the Judge upon authorization request.
@@ -26,27 +26,60 @@ namespace MegaCityOne.Mvc
         /// <summary>
         /// Creates an instance of a JudgeAuthorizeAttribute.
         /// </summary>
-        public JudgeAuthorizeAttribute()
+        public JudgeAuthorizeAttribute(string rule)
         {
             this.Rule = null;
         }
 
         /// <summary>
-        /// Calls the Advise method of the Judge returned by the 
-        /// Dispatcher.Dispatch() method with the Rule property as the first 
-        /// Advise parameter and the given httpContext as the second Advise 
-        /// parameter.
+        /// This method executes authorization based on the Judge returned by 
+        /// the MegaCityOne.Mvc.Dispatcher.
         /// </summary>
-        /// <param name="httpContext">The http context of the current 
-        /// controller method call. This parameter will be passed to the 
-        /// Judge.Advise method as the first and only argument.</param>
-        /// <returns>The Judge.Advise result.</returns>
-        protected override bool AuthorizeCore(HttpContextBase httpContext)
+        /// <param name="filterContext">The authorization context.</param>
+        public void OnAuthorization(AuthorizationContext filterContext)
         {
+            if (filterContext == null)
+            {
+                throw new ArgumentNullException("filterContext");
+            }
+
+            if (AuthorizeCore(filterContext.HttpContext))
+            {
+                HttpCachePolicyBase cachePolicy = filterContext.HttpContext.Response.Cache;
+                cachePolicy.SetProxyMaxAge(new TimeSpan(0));
+                cachePolicy.AddValidationCallback(CacheValidateHandler, null /* data */);
+            }
+            else
+            {
+                filterContext.Result = (ActionResult)new HttpUnauthorizedResult();
+            }
+        }
+
+        private bool AuthorizeCore(HttpContextBase httpContext)
+        {
+            if (httpContext == null)
+            {
+                throw new ArgumentNullException("httpContext");
+            }
+
+            IPrincipal originalPrincipal = Thread.CurrentPrincipal;
+            Thread.CurrentPrincipal = httpContext.User;
             Judge judge = Dispatcher.Current.Dispatch();
             bool advisal = judge.Advise(this.Rule, httpContext);
             Dispatcher.Current.Returns(judge);
+            Thread.CurrentPrincipal = originalPrincipal;
+
             return advisal;
         }
+
+        private void CacheValidateHandler(HttpContext context, object data, ref HttpValidationStatus validationStatus)
+        {
+            validationStatus = HttpValidationStatus.Valid;
+            if (!this.AuthorizeCore(new HttpContextWrapper(context)))
+            {
+                validationStatus = HttpValidationStatus.IgnoreThisRequest;
+            }
+        }
+
     }
 }

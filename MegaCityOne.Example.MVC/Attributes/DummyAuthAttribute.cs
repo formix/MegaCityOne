@@ -14,7 +14,7 @@ namespace MegaCityOne.Example.Mvc.Attributes
     {
         public void OnAuthentication(AuthenticationContext filterContext)
         {
-            Thread.CurrentPrincipal = new GenericPrincipal(
+            filterContext.HttpContext.User = new GenericPrincipal(
                 new GenericIdentity("formix"),
                 new string[] { "administrators", "engineer" });
 
@@ -22,6 +22,11 @@ namespace MegaCityOne.Example.Mvc.Attributes
 
         public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
         {
+            var user = filterContext.HttpContext.User;
+            if (user == null || !user.Identity.IsAuthenticated)
+            {
+                filterContext.Result = new HttpUnauthorizedResult();
+            }
         }
     }
 }

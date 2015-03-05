@@ -23,10 +23,10 @@ namespace MegaCityOne.Example.Mvc
 
                 // The main page can be displayed if the current user is in the "admininstrators" role or
                 // is named "formix" and only if we are between 1am and 11pm.
-                var startTime = DateTime.MinValue.AddHours(1);
-                var endTime = DateTime.MinValue.AddHours(23);
+                var startTime = DateTime.MinValue.AddHours(1); 
+                var endTime = DateTime.MinValue.AddHours(23); // Dunno if MinValue is UTC or Local though...
                 var time = DateTime.MinValue.Add(
-                    DateTime.Now.Subtract(DateTime.UtcNow.Date));
+                    DateTime.UtcNow.Subtract(DateTime.UtcNow.Date));
 
                 return (principal.IsInRole("administrators") || principal.Identity.Name == "formix") &&
                     (time.CompareTo(startTime) >= 0) && 

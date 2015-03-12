@@ -1,6 +1,21 @@
-﻿@{
+﻿@model MegaCityOne.Example.Mvc.Models.HomeModel
+@{
     ViewBag.Title = "Home";
 }
 
 <h2 class="text-danger text-uppercase">Home</h2>
 
+@using (Html.BeginForm())
+{
+    <div class="input-group">
+        <span class="input-group-addon">User Name</span>
+        @Html.TextBoxFor(model => model.User.Name, new { @class = "form-control" })
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">User Roles</span>
+        @Html.TextBoxFor(model => model.User.Roles, new { @class = "form-control" })
+    </div>
+    <div class="btn-group pull-right" role="group">
+        <button type="submit" class="btn btn-primary">Update</button>
+    </div>
+}

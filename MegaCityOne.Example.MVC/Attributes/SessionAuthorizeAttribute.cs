@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MegaCityOne.Example.Mvc.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
@@ -10,13 +11,17 @@ using System.Web.Mvc.Filters;
 namespace MegaCityOne.Example.Mvc.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class DummyAuthAttribute : ActionFilterAttribute, IAuthenticationFilter
+    public class SessionAuthorizeAttribute : ActionFilterAttribute, IAuthenticationFilter
     {
         public void OnAuthentication(AuthenticationContext filterContext)
         {
-            filterContext.HttpContext.User = new GenericPrincipal(
-                new GenericIdentity("formix"),
-                new string[] { "administrators", "engineer" });
+            UserData userData = (UserData)filterContext.HttpContext.Session["User"];
+            if (userData != null)
+            {
+                filterContext.HttpContext.User = new GenericPrincipal(
+                    new GenericIdentity("formix"),
+                    new string[] { "administrator", "engineer" });
+            }
 
         }
 

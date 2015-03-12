@@ -28,7 +28,7 @@ namespace MegaCityOne.Example.Mvc
                 var time = DateTime.MinValue.Add(
                     DateTime.UtcNow.Subtract(DateTime.UtcNow.Date));
 
-                return (principal.IsInRole("administrators") || principal.Identity.Name == "formix") &&
+                return (principal.IsInRole("administrator") || principal.Identity.Name == "formix") &&
                     (time.CompareTo(startTime) >= 0) && 
                     (time.CompareTo(endTime) < 0);
             });

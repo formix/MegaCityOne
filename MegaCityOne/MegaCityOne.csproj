@@ -64,6 +64,7 @@
     <Compile Include="JudgeAnderson.cs" />
     <Compile Include="LawgiverException.cs" />
     <Compile Include="Mvc\JudgeAuthorizeAttribute.cs" />
+    <Compile Include="Mvc\JudgeHelper.cs" />
     <Compile Include="Mvc\SummonEventArgs.cs" />
     <Compile Include="Mvc\SummonDelegate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

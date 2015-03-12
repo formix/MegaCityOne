@@ -378,10 +378,13 @@ Event fired when there is no Judge available for the current thread id. The even
 This attribute leverage MegaCityOne's Judge security for MVC applications. The rule to be advised is mandatory.
 
 
-### Constructor(System.String)
+### Constructor(rule)
 
 Creates an instance of a JudgeAuthorizeAttribute.
 
+| Name | Description |
+| ---- | ----------- |
+| rule | *System.String*<br>The rule to be advised during the MVC authorize process. |
 
 ### OnAuthorization(filterContext)
 
@@ -394,6 +397,26 @@ This method executes authorization based on the Judge returned by the MegaCityOn
 ### Rule
 
 The rule to be advised by the Judge upon authorization request.
+
+
+## Mvc.JudgeHelper
+
+This static Judge is intended to be used as a Razor helper. It gets an available Judge from the Dispatcher and It can only advise.
+
+
+### Advise(law, arguments)
+
+Static method to be used inside a Razor rendered web page.
+
+| Name | Description |
+| ---- | ----------- |
+| law | *System.String*<br>The law to be advized |
+| arguments | *System.Object[]*<br>Optional arguments to hel the Judge give an advice. |
+
+
+#### Returns
+
+
 
 
 ## Mvc.SummonDelegate

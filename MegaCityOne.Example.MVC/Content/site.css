@@ -7,6 +7,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    width: 760px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -22,3 +23,10 @@ select,
 textarea {
     /*max-width: 280px;*/
 }
+
+.input-group-addon {
+    min-width: 100px;
+}
+
+
+ 

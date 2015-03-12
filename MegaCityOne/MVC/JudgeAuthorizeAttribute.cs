@@ -26,9 +26,11 @@ namespace MegaCityOne.Mvc
         /// <summary>
         /// Creates an instance of a JudgeAuthorizeAttribute.
         /// </summary>
+        /// <param name="rule">The rule to be advised during the MVC 
+        /// authorize process.</param>
         public JudgeAuthorizeAttribute(string rule)
         {
-            this.Rule = null;
+            this.Rule = rule;
         }
 
         /// <summary>

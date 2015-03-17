@@ -20,7 +20,7 @@ namespace MegaCityOne.Tests
         /// Test to see if a simple law works well.
         /// </summary>
         [TestMethod]
-        public void TestSimpleCompiledRuleSuccess()
+        public void SimpleJavaScriptRuleSuccess()
         {
             JudgeAnderson judge = new JudgeAnderson();
             judge.Load(@"function CanSeeBankAccount(principal) {
@@ -40,7 +40,7 @@ namespace MegaCityOne.Tests
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(LawgiverException))]
-        public void TestSimpleCompiledRuleFail()
+        public void SimpleJavaScriptRuleFail()
         {
             JudgeAnderson judge = new JudgeAnderson();
             judge.Load(@"function CanSeeBankAccount(principal) {
@@ -58,7 +58,7 @@ namespace MegaCityOne.Tests
         /// This method shall not thow any LawgiverException.
         /// </summary>
         [TestMethod]
-        public void LoadLawsFromAnotherAssembly()
+        public void LoadLawsFromJavaScriptFile()
         {
             JudgeAnderson judge = new JudgeAnderson();
             judge.Load(new FileInfo("JusticeDepartment.js"));

@@ -152,6 +152,11 @@ namespace MegaCityOne
                 throw new ArgumentException("The 'law' parameter cannot be null or empty.");
             }
 
+            if (!this.Principal.Identity.IsAuthenticated)
+            {
+                return false;
+            }
+
             var args = new object[arguments.Length + 1];
             args[0] = this.Principal;
             for (int i = 0; i < arguments.Length; i++)

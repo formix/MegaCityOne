@@ -6,3 +6,4 @@ TestResults
 *.swp
 *.nupkg
 *.user
+*.log

@@ -148,6 +148,11 @@ namespace MegaCityOne
                 throw new ArgumentException("The specified law '" + law + "' is not defined.");
             }
 
+            if (!this.Principal.Identity.IsAuthenticated)
+            {
+                return false;
+            }
+
             return this.laws[law](this.Principal, arguments);
         }
 

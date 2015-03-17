@@ -16,7 +16,7 @@ namespace MegaCityOne.Tests
         /// Check if the current Judge is able to identify the Principal from the current thread.
         /// </summary>
         [TestMethod]
-        public void TestPrincipalWithCurrentUser()
+        public void PrincipalWithCurrentUser()
         {
             var judge = new JudgeDummy();
             var expectedUserName = getCurrentUserName();
@@ -39,7 +39,7 @@ namespace MegaCityOne.Tests
         /// that have been previously associated with the current thread.
         /// </summary>
         [TestMethod]
-        public void TestThreadOverridenPrincipal()
+        public void ThreadOverridenPrincipal()
         {
             IPrincipal initialPrincipal = Thread.CurrentPrincipal;
             Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity("vienna"), new string[0]);
@@ -54,7 +54,7 @@ namespace MegaCityOne.Tests
         /// Principal and then back to the current thread principal.
         /// </summary>
         [TestMethod]
-        public void TestJudgeOverridenPrincipal()
+        public void JudgeOverridenPrincipal()
         {
             var judge = new JudgeDummy();
             
@@ -71,7 +71,7 @@ namespace MegaCityOne.Tests
         /// Judge.Advise method returns true.
         /// </summary>
         [TestMethod]
-        public void TestJudgeEnforcePass()
+        public void JudgeEnforcePass()
         {
             // The default Advise implementation for JudgeDummy is to always return true.
             var judgeDummy = new JudgeDummy();
@@ -85,7 +85,7 @@ namespace MegaCityOne.Tests
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(LawgiverException))]
-        public void TestJudgeEnforceFail()
+        public void JudgeEnforceFail()
         {
             // JudgeDummy evil twin that always Advise to false (just like 
             //the real Judge Death)

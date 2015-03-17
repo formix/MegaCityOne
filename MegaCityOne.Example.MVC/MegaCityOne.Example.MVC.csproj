@@ -132,7 +132,7 @@
     <Compile Include="App_Start\JudgeConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Attributes\SessionAuthorizeAttribute.cs" />
+    <Compile Include="Attributes\SessionAuthenticateAttribute.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -141,6 +141,7 @@
     <Compile Include="Infrastructure\DependencyResolvers\NinjectDependencyResolver.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Data\UserData.cs" />
+    <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security;
 using System.Security.Principal;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -45,6 +40,11 @@ namespace MegaCityOne.Mvc
                 throw new ArgumentNullException("filterContext");
             }
 
+            if (AllowAnonymous(filterContext))
+            {
+                return;
+            }
+
             if (AuthorizeCore(filterContext.HttpContext))
             {
                 HttpCachePolicyBase cachePolicy = filterContext.HttpContext.Response.Cache;
@@ -66,11 +66,8 @@ namespace MegaCityOne.Mvc
 
             IPrincipal originalPrincipal = Thread.CurrentPrincipal;
             Thread.CurrentPrincipal = httpContext.User;
-            Judge judge = Dispatcher.Current.Dispatch();
-            bool advisal = judge.Advise(this.Rule, httpContext);
-            Dispatcher.Current.Returns(judge);
+            bool advisal = JudgeDispatcher.Advise(this.Rule, HttpContext.Current);
             Thread.CurrentPrincipal = originalPrincipal;
-
             return advisal;
         }
 
@@ -83,5 +80,10 @@ namespace MegaCityOne.Mvc
             }
         }
 
+        private bool AllowAnonymous(AuthorizationContext filterContext)
+        {
+            return filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), inherit: true) ||
+                filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), inherit: true);
+        }
     }
 }

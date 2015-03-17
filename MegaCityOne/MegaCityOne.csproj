@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractJudge.cs" />
-    <Compile Include="Mvc\Dispatcher.cs" />
+    <Compile Include="Mvc\JudgeDispatcher.cs" />
     <Compile Include="JusticeDepartment.cs" />
     <Compile Include="JudgeDredd.cs" />
     <Compile Include="Law.cs" />
@@ -64,7 +64,6 @@
     <Compile Include="JudgeAnderson.cs" />
     <Compile Include="LawgiverException.cs" />
     <Compile Include="Mvc\JudgeAuthorizeAttribute.cs" />
-    <Compile Include="Mvc\JudgeHelper.cs" />
     <Compile Include="Mvc\SummonEventArgs.cs" />
     <Compile Include="Mvc\SummonDelegate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

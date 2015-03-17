@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace MegaCityOne.Mvc
 {
     /// <summary>
-    /// The dispatcher is responsible to check if a Judge is available for 
+    /// The Judge Dispatcher is responsible to check if a Judge is available for 
     /// the call. If no Judge is available, a Judge will be summoned. 
     /// Dispatched Judges must be returned to the pool by using the 
     /// Dispatcher.Return method. Otherwise, the Dispatch method will summon 
     /// a new Judge on each call. The Dispatcher as a JudgePool. This class is 
     /// a singleton and cannot be instanciated. You must use the static 
-    /// member Dispatcher.Current to use an instance of this class.
+    /// member Dispatcher.Current to use an instance of this class. This class
+    /// is thread safe.
     /// </summary>
-    public sealed class Dispatcher
+    public sealed class JudgeDispatcher
     {
         #region Events
 
@@ -31,7 +34,7 @@ namespace MegaCityOne.Mvc
 
         #region Fields
 
-        private static Dispatcher current = null;
+        private static JudgeDispatcher current = null;
 
         private Stack<Judge> judgePool;
         private HashSet<int> dispatchedJudges;
@@ -43,15 +46,29 @@ namespace MegaCityOne.Mvc
         /// <summary>
         /// The static dispatcher instance for the current application.
         /// </summary>
-        public static Dispatcher Current
+        public static JudgeDispatcher Current
         {
             get
             {
                 if (current == null)
                 {
-                    current = new Dispatcher();
+                    current = new JudgeDispatcher();
                 }
                 return current;
+            }
+        }
+
+        /// <summary>
+        /// Gets the Principal of the current thread.
+        /// </summary>
+        public static IPrincipal Principal
+        {
+            get
+            {
+                Judge judge = Current.Dispatch();
+                IPrincipal principal = judge.Principal;
+                Current.Returns(judge);
+                return principal;
             }
         }
 
@@ -59,7 +76,7 @@ namespace MegaCityOne.Mvc
 
         #region Constructors
 
-        private Dispatcher()
+        private JudgeDispatcher()
         {
             this.judgePool = new Stack<Judge>();
             this.dispatchedJudges = new HashSet<int>();
@@ -68,6 +85,62 @@ namespace MegaCityOne.Mvc
         #endregion
 
         #region Methods
+
+
+        /// <summary>
+        /// Dispatch this Advise call to an available Judge in the pool.
+        /// </summary>
+        /// <param name="law">The law to Advise.</param>
+        /// <param name="arguments">Optionnal arguments provided to help the 
+        /// judge to give his advice. By default, the first argument is 
+        /// always the HttpContext.Current.</param>
+        /// <returns>True is the law is respected, false otherwise.</returns>
+        public static bool Advise(string law, params object[] arguments)
+        {
+            IPrincipal oldPrincipal = Thread.CurrentPrincipal;
+            Thread.CurrentPrincipal = HttpContext.Current.User;
+            Judge judge = Current.Dispatch();
+            try
+            {
+                object[] args = new object[arguments.Length + 1];
+                args[0] = HttpContext.Current;
+                Array.Copy(arguments, 0, args, 1, arguments.Length);
+                bool advisal = judge.Advise(law, args);
+                return advisal;
+            }
+            finally
+            {
+                Current.Returns(judge);
+                Thread.CurrentPrincipal = oldPrincipal;
+            }
+        }
+
+
+        /// <summary>
+        /// Dispatch this Enforce call to an available Judge in the pool.
+        /// </summary>
+        /// <param name="law">The law to Enforce.</param>
+        /// <param name="arguments">Optionnal arguments provided to help the 
+        /// judge to enforce the law. By default, the first argument is 
+        /// always the HttpContext.Current.</param>
+        public static void Enforce(string law, params object[] arguments)
+        {
+            IPrincipal oldPrincipal = Thread.CurrentPrincipal;
+            Thread.CurrentPrincipal = HttpContext.Current.User;
+            Judge judge = Current.Dispatch();
+            try
+            {
+                object[] args = new object[arguments.Length + 1];
+                args[0] = HttpContext.Current;
+                Array.Copy(arguments, 0, args, 1, arguments.Length);
+                judge.Enforce(law, args);
+            }
+            finally
+            {
+                Current.Returns(judge);
+                Thread.CurrentPrincipal = oldPrincipal;
+            }
+        }
 
         /// <summary>
         /// Thread safe. Calling the dispatch method can trigger the Summon 

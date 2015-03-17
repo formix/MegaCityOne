@@ -8,7 +8,7 @@ namespace MegaCityOne.Example.Mvc
 {
     public class JudgeConfig
     {
-        public static void RegisterJudge(Dispatcher dispatcher)
+        public static void RegisterJudge(JudgeDispatcher dispatcher)
         {
             dispatcher.Summon += dispatcher_Summon;
         }
@@ -17,9 +17,10 @@ namespace MegaCityOne.Example.Mvc
         static void dispatcher_Summon(object source, SummonEventArgs e)
         {
             JudgeDredd dredd = new JudgeDredd();
-            dredd.Laws.Add("CanDisplayMainPage", (principal, arguments) =>
+            
+            dredd.Laws.Add("CanCreateProject", (principal, arguments) =>
             {
-                HttpContextBase httpContext = (HttpContextBase)arguments[0];
+                HttpContext httpContext = (HttpContext)arguments[0];
 
                 // The main page can be displayed if the current user is in the "admininstrators" role or
                 // is named "formix" and only if we are between 1am and 11pm.
@@ -28,10 +29,16 @@ namespace MegaCityOne.Example.Mvc
                 var time = DateTime.MinValue.Add(
                     DateTime.UtcNow.Subtract(DateTime.UtcNow.Date));
 
-                return (principal.IsInRole("administrator") || principal.Identity.Name == "formix") &&
+                return principal.IsInRole("ProjectManager")  &&
                     (time.CompareTo(startTime) >= 0) && 
                     (time.CompareTo(endTime) < 0);
             });
+
+            dredd.Laws.Add("CanManageUsers", (principal, arguments) =>
+            {
+                return principal.IsInRole("Administrator");
+            });
+
             e.Respondent = dredd;
         }
     }

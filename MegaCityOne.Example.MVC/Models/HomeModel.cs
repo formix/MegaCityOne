@@ -8,8 +8,27 @@ namespace MegaCityOne.Example.Mvc.Models
 {
     public class HomeModel
     {
-        public UserData User { get; set; }
-        public string Identity { get; set; }
-        public string[] Roles { get; set; }
+        public string User { get; set; }
+        public List<RoleModel> Roles { get; set; }
+
+
+        public HomeModel()
+        {
+            this.Roles = new List<RoleModel>();
+            this.Roles.Add(new RoleModel("Administrator"));
+            this.Roles.Add(new RoleModel("ProjectManager"));
+        }
+
+
+        public void SetSelected(string roleName, bool value)
+        {
+            foreach (var role in this.Roles)
+            {
+                if (role.Name == roleName)
+                {
+                    role.Selected = value;
+                }
+            }
+        }
     }
 }

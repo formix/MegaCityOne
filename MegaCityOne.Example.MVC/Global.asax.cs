@@ -15,7 +15,7 @@ namespace MegaCityOne.Example.Mvc
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            JudgeConfig.RegisterJudge(Dispatcher.Current);
+            JudgeConfig.RegisterJudge(JudgeDispatcher.Current);
         }
     }
 }

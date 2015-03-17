@@ -332,47 +332,6 @@ Returns a string representation of the current object.
 a string representation of the current object.
 
 
-## Mvc.Dispatcher
-
-The dispatcher is responsible to check if a Judge is available for the call. If no Judge is available, a Judge will be summoned. Dispatched Judges must be returned to the pool by using the Dispatcher.Return method. Otherwise, the Dispatch method will summon a new Judge on each call. The Dispatcher as a JudgePool. This class is a singleton and cannot be instanciated. You must use the static member Dispatcher.Current to use an instance of this class.
-
-
-### Current
-
-The static dispatcher instance for the current application.
-
-
-### Dispatch
-
-Thread safe. Calling the dispatch method can trigger the Summon event if there is no Judge available in the pool. If this is the case, it is assumed that a Summon event handler will create a Judge and asign it to the SummonEventArgs.Respondent property. Otherwise, return an existing Judge from the pool.
-
-
-#### Returns
-
-A Judge available to answer the call.
-
-
-### OnSummon(e)
-
-Method used to fire a Summon event.
-
-| Name | Description |
-| ---- | ----------- |
-| e | *MegaCityOne.Mvc.SummonEventArgs*<br>The event arguments. |
-
-### Returns(judge)
-
-Thread safe. Returns a dispatched judge to the pool. This method do not accept a judge that have not been dispatched by the current instance of the dispatcher.
-
-| Name | Description |
-| ---- | ----------- |
-| judge | *MegaCityOne.Judge*<br>The judge that answered a previous call to Dispatch. |
-
-### Summon
-
-Event fired when there is no Judge available for the current thread id. The event handler is expected to create a Judge, provide it with laws and attach it the the event args.
-
-
 ## Mvc.JudgeAuthorizeAttribute
 
 This attribute leverage MegaCityOne's Judge security for MVC applications. The rule to be advised is mandatory.
@@ -399,24 +358,74 @@ This method executes authorization based on the Judge returned by the MegaCityOn
 The rule to be advised by the Judge upon authorization request.
 
 
-## Mvc.JudgeHelper
+## Mvc.JudgeDispatcher
 
-This static Judge is intended to be used as a Razor helper. It gets an available Judge from the Dispatcher and It can only advise.
+The Judge Dispatcher is responsible to check if a Judge is available for the call. If no Judge is available, a Judge will be summoned. Dispatched Judges must be returned to the pool by using the Dispatcher.Return method. Otherwise, the Dispatch method will summon a new Judge on each call. The Dispatcher as a JudgePool. This class is a singleton and cannot be instanciated. You must use the static member Dispatcher.Current to use an instance of this class. This class is thread safe.
 
 
 ### Advise(law, arguments)
 
-Static method to be used inside a Razor rendered web page.
+Dispatch this Advise call to an available Judge in the pool.
 
 | Name | Description |
 | ---- | ----------- |
-| law | *System.String*<br>The law to be advized |
-| arguments | *System.Object[]*<br>Optional arguments to hel the Judge give an advice. |
+| law | *System.String*<br>The law to Advise. |
+| arguments | *System.Object[]*<br>Optionnal arguments provided to help the judge to give his advice. By default, the first argument is always the HttpContext.Current. |
 
 
 #### Returns
 
+True is the law is respected, false otherwise.
 
+
+### Current
+
+The static dispatcher instance for the current application.
+
+
+### Dispatch
+
+Thread safe. Calling the dispatch method can trigger the Summon event if there is no Judge available in the pool. If this is the case, it is assumed that a Summon event handler will create a Judge and asign it to the SummonEventArgs.Respondent property. Otherwise, return an existing Judge from the pool.
+
+
+#### Returns
+
+A Judge available to answer the call.
+
+
+### Enforce(law, arguments)
+
+Dispatch this Enforce call to an available Judge in the pool.
+
+| Name | Description |
+| ---- | ----------- |
+| law | *System.String*<br>The law to Enforce. |
+| arguments | *System.Object[]*<br>Optionnal arguments provided to help the judge to enforce the law. By default, the first argument is always the HttpContext.Current. |
+
+### OnSummon(e)
+
+Method used to fire a Summon event.
+
+| Name | Description |
+| ---- | ----------- |
+| e | *MegaCityOne.Mvc.SummonEventArgs*<br>The event arguments. |
+
+### Principal
+
+Gets the Principal of the current thread.
+
+
+### Returns(judge)
+
+Thread safe. Returns a dispatched judge to the pool. This method do not accept a judge that have not been dispatched by the current instance of the dispatcher.
+
+| Name | Description |
+| ---- | ----------- |
+| judge | *MegaCityOne.Judge*<br>The judge that answered a previous call to Dispatch. |
+
+### Summon
+
+Event fired when there is no Judge available for the current thread id. The event handler is expected to create a Judge, provide it with laws and attach it the the event args.
 
 
 ## Mvc.SummonDelegate

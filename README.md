@@ -4,7 +4,7 @@ Windows Advanced Authorization System
 [![Join the chat at https://gitter.im/formix/MegaCityOne](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/formix/MegaCityOne?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 * This is not an authentication library.
-* This project uses Judge Dredd [metaphor](http://xenia.media.mit.edu/~mt/thesis/mt-thesis-2.2.html) to implement autorization.
+* This project uses Judge Dredd metaphor to implement autorization.
 * This library integrates:
     * seamlessly with Windows Standard Security;
     * prefectly with ASP.NET security;
@@ -31,12 +31,11 @@ command line:
 ## Authentication
 
 As stated in the premice, MegaCityOne has nothing to do with authentication.
-You can use known libraries like 
-[Owin](https://www.nuget.org/packages/Microsoft.Owin.Security.OAuth/) which have a 
-few things about authentication available or 
-[MVC5 Authentication Filters](http://www.dotnetcurry.com/showarticle.aspx?ID=957).
-Starting an MVC5 application in Visual Studio gives a quite filled template
-haveing a Login screen and some Owin code to handle Authentication.
+You are responsible to request your user's name and password and the 
+validate his password. Then see instructions below to set the credentials to
+the current thread. For MVC 5 integration, install the nuget package 
+[MegaCityOne-Mvc](https://github.com/formix/MegaCityOne-Mvc) and read
+provided instructions on the project page.
 
 ### Web Application
 
@@ -44,11 +43,6 @@ Set the authenticated user's credentials in the current HttpContext or the
 current thread.
 
 ```c#
-// Web applications:
-System.Web.HttpContext.Current.User = new GenericPrincipal(
-    new GenericIdentity("garry"),
-    new string[] {"SiteAdmin", "Author", "SomeOtherUsefulGroup"});
-
 // Or for desktop applications:
 System.Threading.Thread.CurrentPrincipal = new GenericPrincipal(
     new GenericIdentity("garry"),

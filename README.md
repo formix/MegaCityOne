@@ -31,8 +31,9 @@ command line:
 ## Authentication
 
 As stated in the premice, MegaCityOne has nothing to do with authentication.
-You are responsible to request your user's name and password and the 
-validate his password. Then see instructions below to set the credentials to
+You are responsible to request user name and password in your application and 
+then validate the password against the corresponding credentials in your 
+system's database. Then see instructions below to set the credentials to
 the current thread. For MVC 5 integration, install the nuget package 
 [MegaCityOne-Mvc](https://github.com/formix/MegaCityOne-Mvc) and read
 provided instructions on the project page.

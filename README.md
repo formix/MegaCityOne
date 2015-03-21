@@ -38,7 +38,7 @@ the current thread. For MVC 5 integration, install the nuget package
 [MegaCityOne-Mvc](https://github.com/formix/MegaCityOne-Mvc) and read
 provided instructions on the project page.
 
-### Web Application
+### Attaching Credentials to Your Application Thread
 
 Set the authenticated user's credentials in the current HttpContext or the 
 current thread.
@@ -49,10 +49,6 @@ System.Threading.Thread.CurrentPrincipal = new GenericPrincipal(
     new GenericIdentity("garry"),
     new string[] {"SiteAdmin", "Author", "SomeOtherUsefulGroup"});
 ```
-
-Note that by default, the running thread current user corresponds to a 
-WindowsPrincipal with your Windows defined groups or IUSR_SOMETHING 
-for web applications (unless using IIS Windows authentication).
 
 ## How to Judge
 

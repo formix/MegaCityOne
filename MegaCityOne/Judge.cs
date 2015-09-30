@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Principal;
 
 namespace MegaCityOne
@@ -12,6 +13,11 @@ namespace MegaCityOne
         /// The principal assigned to the current Judge.
         /// </summary>
         IPrincipal Principal { get; set; }
+
+        /// <summary>
+        /// Returns all rule names useable by the current Judge.
+        /// </summary>
+        ICollection<string> Rules { get; }
 
         /// <summary>
         /// The Judge gives an adivce regarding a law taking in account some 

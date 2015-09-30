@@ -53,6 +53,12 @@ namespace MegaCityOne
             }
         }
 
+
+        /// <summary>
+        /// Returns all rule names useable by the current Judge.
+        /// </summary>
+        public abstract ICollection<string> Rules { get; }
+        
         #endregion
 
         #region Methods

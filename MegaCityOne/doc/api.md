@@ -44,6 +44,11 @@ Gets or sets the principal currently under scrutiny of this Judge. After the Jud
 Setting a value to this property do not override System.Threading.Thread.CurrentPrincipal.
 
 
+### Rules
+
+Returns all rule names useable by the current Judge.
+
+
 ## Judge
 
 Defining a security engine basic interface.
@@ -79,6 +84,11 @@ The Judge is in a situation where he have to give a Life or Death sentence regar
 ### Principal
 
 The principal assigned to the current Judge.
+
+
+### Rules
+
+Returns all rule names useable by the current Judge.
 
 
 ## JudgeAnderson
@@ -157,6 +167,11 @@ Raise the Message event.
 | ---- | ----------- |
 | e | *MegaCityOne.MessageEventArgs*<br>The event arguments |
 
+### Rules
+
+Returns all rule names in a collection.
+
+
 ## JudgeDredd
 
 JudgeDredd is a Judge that uses Laws defined as lambda expressions.
@@ -223,6 +238,11 @@ Search in the given path a library that may contains one or more JusticeDepartme
 | Name | Description |
 | ---- | ----------- |
 | path | *System.String*<br>The file path to the library containing the JusticeDepartment. |
+
+### Rules
+
+Returns all rule names useable by the current Judge.
+
 
 ## JusticeDepartment
 

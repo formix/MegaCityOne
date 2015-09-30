@@ -77,5 +77,25 @@ namespace MegaCityOne.Tests
             judge.Enforce("CanDepositToAccount", account);
             judge.Enforce("CanDisplayBalance", account);
         }
+
+
+        /// <summary>
+        /// Test if its possible to get the rules added to the engine.
+        /// </summary>
+        [TestMethod]
+        public void TestRulesList()
+        {
+            JudgeAnderson judge = new JudgeAnderson();
+            judge.Load(new FileInfo("JusticeDepartment.js"));
+
+            judge.Principal = new GenericPrincipal(
+                    new GenericIdentity("rico"),
+                    new string[] { "BankUser" });
+
+            var rules = judge.Rules;
+            Assert.IsTrue(rules.Contains("CanWithdrawFromAccount"));
+            Assert.IsTrue(rules.Contains("CanDepositToAccount"));
+            Assert.IsTrue(rules.Contains("CanDisplayBalance"));
+        }
     }
 }

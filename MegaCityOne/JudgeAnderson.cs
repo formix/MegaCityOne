@@ -2,6 +2,7 @@
 using Jint.Native;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Security;
@@ -37,6 +38,7 @@ namespace MegaCityOne
         #region Fields
 
         private Jint.Engine engine;
+        private HashSet<string> initialGlobals;
 
         #endregion
 
@@ -55,6 +57,18 @@ namespace MegaCityOne
             } 
         }
 
+
+        /// <summary>
+        /// Returns all rule names in a collection.
+        /// </summary>
+        public override ICollection<string> Rules
+        {
+            get
+            {
+                return this.GetScriptFunctionInstances();
+            }
+        }
+
         #endregion
 
         #region Constructors
@@ -65,6 +79,7 @@ namespace MegaCityOne
         public JudgeAnderson()
         {
             this.engine = null;
+            this.initialGlobals = new HashSet<string>();
         }
 
         #endregion
@@ -129,6 +144,8 @@ namespace MegaCityOne
 
             this.engine = new Jint.Engine();
             this.engine.SetValue("message", new JsMessageDelegate(o => OnMessage(new MessageEventArgs(o.ToString()))));
+
+            this.initialGlobals = new HashSet<string>(this.engine.Global.Properties.Select(p => p.Key));
             this.engine.Execute(script);
         }
 
@@ -203,6 +220,27 @@ namespace MegaCityOne
             {
                 this.Message(this, e);
             }
+        }
+
+
+        private ICollection<string> GetScriptFunctionInstances()
+        {
+            if (this.engine == null)
+            {
+                return new List<string>();
+            }
+            HashSet<string> rules = new HashSet<string>();
+            foreach (var item in this.engine.Global.Properties)
+            {
+                if (!this.initialGlobals.Contains(item.Key))
+                {
+                    if (item.Value.Value.ToString().Contains("function"))
+                    {
+                        rules.Add(item.Key);
+                    }
+                }
+            }
+            return rules;
         }
 
         #endregion

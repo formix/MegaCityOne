@@ -13,6 +13,11 @@ namespace MegaCityOne.Tests.Judges
 
         private Advisable adviseProxy;
 
+        public override ICollection<string> Rules
+        {
+            get { return new List<string>(); }
+        }
+
         /// <summary>
         /// Creates a dummy Judge that always Advise to true!
         /// </summary>

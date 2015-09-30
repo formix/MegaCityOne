@@ -26,6 +26,18 @@ namespace MegaCityOne
             get { return this.laws; }
         }
 
+
+        /// <summary>
+        /// Returns all rule names useable by the current Judge.
+        /// </summary>
+        public override ICollection<string> Rules
+        {
+            get
+            {
+                return this.laws.Keys;
+            }
+        }
+
         #endregion
 
         #region Constructors

@@ -162,7 +162,7 @@ if needs be.
 
 # Example
 
-[Bank account example using JudgeDredd](https://github.com/formix/MegaCityOne/blob/master/MegaCityOne.Examples/BankAccountExample.cs)
+[Bank account example using JudgeDredd](https://github.com/formix/MegaCityOne/blob/master/MegaCityOne.Example.ConsoleEx/BankAccountExample.cs)
 
 # Regarding Interfaces
 
